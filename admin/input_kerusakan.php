@@ -1,4 +1,4 @@
-<form method="post" action="#" id="kejadian_form">
+<form method="post" action="#" id="kerusakan_form">
 	<div class="form-group">
 		<label for="judul">Judul</label>
 		<input type="text" class="form-control" id="judul" name="judul" placeholder="Enter Judul" required>
@@ -18,8 +18,8 @@
 		<div id="map" height="460px" width="100%"></div>
 	</div>
 	<div class="form-group">
-		<label for="isi">Keterangan Kejadian</label>
-		<textarea name="isi_kejadian" id="isi_kejadian"></textarea>
+		<label for="isi">Keterangan Kerusakan</label>
+		<textarea name="isi_kerusakan" id="isi_kerusakan"></textarea>
 	</div>
 	<div class="form-group">
 		<center>
@@ -27,4 +27,3 @@
 		</center>
 	</div>
 </form>
-    

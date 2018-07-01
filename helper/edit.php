@@ -7,7 +7,11 @@
 	
 	if($_POST["operation"] == "edit" && $_POST["table"] == "kejadian"){
 		$event = new Event($db);
-		$result = $event->fetchKejadian($_POST['id']);
-		echo json_encode($result);
+		$data = array(
+			'id' => $_POST['id'],
+			'isi' => $_POST['isi_kejadian']
+		);
+		$res = $event->updateKejadian($data);
+		echo json_encode($res);
 	}
 ?>

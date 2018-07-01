@@ -28,8 +28,7 @@
 	
 	if($_POST["operation"] == "readOne" && $_POST["table"] == "kejadian"){
 		$event = new Event($db);
-		$result = $event->fetchKejadian($_POST['id']);
-		echo json_encode($result);
+		$event->fetchKejadian($_POST['id']);
 	}
 	
 	if($_POST["operation"] == "read" && $_POST["table"] == "kejadian"){

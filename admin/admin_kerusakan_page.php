@@ -11,9 +11,9 @@
 	<div class="container" id="contains">
 		<div class="card">
 			<div class="card-header">
-				<a href="#" class="input_kejadian" onclick="loadPage('input_kejadian.php', inputFunc)">Input Kejadian</a>
+				<a href="#" class="input_kerusakan" onclick="loadPage('input_kejadian.php', inputFunc)">Input Kejadian</a>
 				|
-				<a href="#" class="data_kejadian" onclick="loadPage('data_kejadian.php', dataFunc)">Data Kejadian</a>
+				<a href="#" class="data_kerusakan" onclick="loadPage('data_kejadian.php', dataFunc)">Data Kejadian</a>
 			</div>
 			<div class="card-body">
 				<div id="isi"></div>
@@ -46,7 +46,7 @@ var maps = function(){
 
 var callTinyMce = function(){
 	tinymce.init({
-		selector : '#isi_kejadian',
+		selector : '#isi_kerusakan',
 		theme: 'modern',
 		height: 300,
 		plugins: [
@@ -72,12 +72,11 @@ var loadPage = function(adrr, callFunc) {
 
 var inputFunc = function(){
 	tinymceScript();
-	//callTinyMce();
 	maps();
 }
 
 var dataFunc = function(){
-	tabelKejadian();
+	tabelKerusakan();
 	console.log('run');
 }
 
@@ -85,11 +84,11 @@ var editFunc = function(){
 	tinymceScript();
 }
 
-loadPage('input_kejadian.php', inputFunc);
+loadPage('input_kerusakan.php', inputFunc);
 
-$(document).on('submit', '#kejadian_form', function(event){
+$(document).on('submit', '#kerusakan_form', function(event){
   event.preventDefault();
-  var table = 'kejadian';
+  var table = 'kerusakan';
   var operation = 'add';
   var formData = new FormData(this);
   formData.append('table', table);
@@ -105,7 +104,7 @@ $(document).on('submit', '#kejadian_form', function(event){
     {
 		if(data.msg == 'suc'){
 			$.alert(data.print);
-			$('#kejadian_form')[0].reset();
+			$('#kerusakan_form')[0].reset();
 		}
 		if(data.msg == 'err'){
 			$.alert(data.print);
@@ -114,9 +113,9 @@ $(document).on('submit', '#kejadian_form', function(event){
   });
 });
 
-$(document).on('submit', '#edit_kejadian_form', function(event){
+$(document).on('submit', '#edit_kerusakan_form', function(event){
   event.preventDefault();
-  var table = 'kejadian';
+  var table = 'kerusakan';
   var operation = 'edit';
   var formData = new FormData(this);
   formData.append('table', table);
@@ -137,8 +136,8 @@ $(document).on('submit', '#edit_kejadian_form', function(event){
 					{
 						if(data.msg == 'suc'){
 							$.alert(data.print);
-							$('#edit_kejadian_form')[0].reset();
-							loadPage('data_kejadian.php', dataFunc);
+							$('#edit_kerusakan_form')[0].reset();
+							loadPage('data_kerusakan.php', dataFunc);
 						}
 						if(data.msg == 'err'){
 							$.alert(data.print);
@@ -153,10 +152,10 @@ $(document).on('submit', '#edit_kejadian_form', function(event){
 	});
 });
 
-var tabelKejadian = function(){
+var tabelKerusakan = function(){
 	var opr = 'read';
-	var tbl = 'kejadian';
-	var dataTable = $('#data_kejadian').DataTable({
+	var tbl = 'kerusakan';
+	var dataTable = $('#data_kerusakan').DataTable({
 		"processing":true,
 		"serverSide":true,
 		"order":[],
@@ -178,7 +177,7 @@ var tabelKejadian = function(){
 
 $(document).on('click', '.delete', function(){
     var ids = $(this).attr("id");
-    var tbl = 'kejadian';
+    var tbl = 'kerusakan';
     var opr = 'delete';
 	$.confirm({
 		title: 'Confirm!',
@@ -211,7 +210,7 @@ $(document).on('click', '.delete', function(){
  
  $(document).on('click', '.edit', function(){
 	var ids = $(this).attr("id");
-    var tbl = 'kejadian';
+    var tbl = 'kerusakan';
     var opr = 'readOne';
 	$.confirm({
 		title: 'Confirm!',
@@ -225,12 +224,12 @@ $(document).on('click', '.delete', function(){
 					dataType:"json",
 					success:function(data)
 					{
-						loadPage('edit_kejadian.php', editFunc);
+						loadPage('edit_kerusakan.php', editFunc);
 						setTimeout(function()
 						{ 
 							$('#id').val(data.id);
 							$('#edit_judul').val(data.judul);
-							tinymce.get("isi_kejadian").setContent(data.isi);
+							tinymce.get("isi_kerusakan").setContent(data.isi);
 						}, 3000);
 					}
 				});

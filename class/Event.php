@@ -68,11 +68,57 @@
 			$result = $statement->fetchAll();
 			foreach($result as $row)
 			{
+				$output['id'] = $row["id"];
 				$output["judul"] = $row["judul"];
 				$output["isi"] = $row["isi"];
 				$output["alamat"] = $row["alamat"];
 			}
 			echo json_encode($output);
+		}
+		
+		public function updateKejadian($data = array())
+		{
+			try {
+				$sql = $this->db->prepare(
+					"UPDATE kejadian SET isi = :isi WHERE id = :id"
+				);
+				$sql->bindparam(':isi', $data['isi']);      
+			    $sql->bindparam(':id', $data['id']);
+			    $sql->execute();
+				
+				return $this->output('suc', 'Berhasil Diupdate');
+			}catch(PDOException $e){
+				return $this->output('err', $e->getMessage());
+			}
+		}
+		
+		public function insertKejadian($data = array())
+		{
+			try
+			  {
+				$this->db->beginTransaction();	
+				$addKejadian = $this->db->prepare("
+					INSERT INTO kerusakan(judul, isi, gambar, alamat, lat, lng, tgl_buat, id_admin, id_kasus)
+					VALUES (:judul, :isi, :gambar, :alamat, :lat, :lng, NOW(), :id_admin, :id_kasus);
+				");
+				$addKejadian->bindParam(":judul", $data['judul']);
+				$addKejadian->bindParam(":isi", $data['isi']);
+				$addKejadian->bindParam(":gambar", $data['gambar']);
+				$addKejadian->bindParam(":alamat", $data['addr']);
+				$addKejadian->bindParam(":lat", $data['lat']);
+				$addKejadian->bindParam(":lng", $data['long']);
+				$addKejadian->bindParam(":id_admin", $data['admin']);
+				$addKejadian->bindParam(":id_kasus", $data['kasus']);
+				$addKejadian->execute();
+				
+				$this->db->commit();
+
+				return $this->output('suc','Berhasil Melapor');
+			  }catch(PDOException $e){
+				  // Jika terjadi error
+				$this->db->rollBack();
+				return $this->output('err',$e->getMessage());
+			  }
 		}
 		
 		public function total_records($table)
