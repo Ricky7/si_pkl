@@ -13,10 +13,13 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#">Home
+          <a class="nav-link" href="admin_index.php">Home
             <span class="sr-only">(current)</span>
           </a>
         </li>
+		<li class="nav-item">
+			<a class="nav-link" href="admin_laporan_page.php">Laporan warga</a>
+		</li>
 		<?php if($admin->isLog()){ ?>
 		<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -25,8 +28,14 @@
 			<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 			  <a class="dropdown-item" href="admin_kejadian_page.php">Kejadian</a>
 			  <div class="dropdown-divider"></div>
-			  <a class="dropdown-item" href="#">Kerusakan</a>
+			  <a class="dropdown-item" href="admin_kerusakan_page.php">Kerusakan</a>
 			</div>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="admin_berita_page.php">Berita</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="admin_report_page.php">Report</a>
 		</li>
 		<li class="nav-item">
 			<a class="nav-link" href="admin_logout.php">Logout</a>

@@ -1,3 +1,7 @@
+<div id="fadeLoader"></div>
+<div id="modalLoader">
+    <img id="loader" src="<?php echo getBaseUrl().'images/loader.gif' ?>" width="64%" height="64%" />
+</div>
 <!-- Footer -->
 <footer class="py-5 bg-dark">
   <div class="container">
@@ -17,6 +21,19 @@
 
 <script src="<?php echo getBaseUrl().'DataTables-1.10.18/js/jquery.dataTables.min.js' ?>"></script>
 <script src="<?php echo getBaseUrl().'DataTables-1.10.18/js/dataTables.bootstrap4.min.js' ?>"></script>
+<script src="<?php echo getBaseUrl().'js/flatpickr.js' ?>"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script> -->
+<script>
 
+function openModalLoader() {
+    document.getElementById('modalLoader').style.display = 'block';
+    document.getElementById('fadeLoader').style.display = 'block';
+}
+
+function closeModalLoader() {
+    document.getElementById('modalLoader').style.display = 'none';
+    document.getElementById('fadeLoader').style.display = 'none';
+}
+</script>
 </body>
 </html>

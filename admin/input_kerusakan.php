@@ -19,7 +19,7 @@
 	</div>
 	<div class="form-group">
 		<label for="isi">Keterangan Kerusakan</label>
-		<textarea name="isi_kerusakan" id="isi_kerusakan"></textarea>
+		<textarea name="isi_kejadian" id="isi_kejadian"></textarea>
 	</div>
 	<div class="form-group">
 		<center>

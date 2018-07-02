@@ -88,30 +88,32 @@ var editFunc = function(){
 loadPage('input_kejadian.php', inputFunc);
 
 $(document).on('submit', '#kejadian_form', function(event){
-  event.preventDefault();
-  var table = 'kejadian';
-  var operation = 'add';
-  var formData = new FormData(this);
-  formData.append('table', table);
-  formData.append('operation', operation);
-  $.ajax({
-    url: base_url+"helper/insert.php",
-    method:'POST',
-    data:formData,
-    contentType:false,
-    processData:false,
-    dataType:"json",
-    success:function(data)
-    {
-		if(data.msg == 'suc'){
-			$.alert(data.print);
-			$('#kejadian_form')[0].reset();
+	event.preventDefault();
+	var table = 'kejadian';
+	var operation = 'add';
+	var kasus = '1';
+	var formData = new FormData(this);
+	formData.append('table', table);
+	formData.append('operation', operation);
+	formData.append('kasus', kasus);
+	$.ajax({
+		url: base_url+"helper/insert.php",
+		method:'POST',
+		data:formData,
+		contentType:false,
+		processData:false,
+		dataType:"json",
+		success:function(data)
+		{
+			if(data.msg == 'suc'){
+				$.alert(data.print);
+				$('#kejadian_form')[0].reset();
+			}
+			if(data.msg == 'err'){
+				$.alert(data.print);
+			}
 		}
-		if(data.msg == 'err'){
-			$.alert(data.print);
-		}
-    }
-  });
+	});
 });
 
 $(document).on('submit', '#edit_kejadian_form', function(event){
@@ -159,6 +161,7 @@ var tabelKejadian = function(){
 	var dataTable = $('#data_kejadian').DataTable({
 		"processing":true,
 		"serverSide":true,
+		"destroy": true,
 		"order":[],
 		"ajax":{
 			url:base_url+"helper/read.php",
@@ -172,7 +175,6 @@ var tabelKejadian = function(){
 			"orderable":false,
 		},
 		],
-
 	});
 }
 
@@ -189,11 +191,12 @@ $(document).on('click', '.delete', function(){
 					url:base_url+"helper/delete.php",
 					method:"POST",
 					data:{id:ids,table:tbl,operation:opr},
+					dataType:"json",
 					success:function(data)
 					{
 						if(data.msg == 'suc'){
 							$.alert(data.print);
-							$('#data_kejadian').ajax.reload();
+							$('#data_kejadian').DataTable().ajax.reload();
 						}
 						if(data.msg == 'err'){
 							$.alert(data.print);
@@ -226,11 +229,13 @@ $(document).on('click', '.delete', function(){
 					success:function(data)
 					{
 						loadPage('edit_kejadian.php', editFunc);
+						openModalLoader();
 						setTimeout(function()
 						{ 
 							$('#id').val(data.id);
 							$('#edit_judul').val(data.judul);
 							tinymce.get("isi_kejadian").setContent(data.isi);
+							closeModalLoader();
 						}, 3000);
 					}
 				});

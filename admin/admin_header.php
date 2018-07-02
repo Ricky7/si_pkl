@@ -21,6 +21,7 @@
 	<link href="<?php echo getBaseUrl().'dist/jquery.addressPickerByGiro.css' ?>" rel="stylesheet" media="screen">
 	<link href="<?php echo getBaseUrl().'DataTables-1.10.18/css/jquery.dataTables.min.css' ?>">
 	<link href="<?php echo getBaseUrl().'DataTables-1.10.18/css/jquery.bootstrap4.min.css' ?>">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   </head>
 
   <body>

@@ -14,4 +14,14 @@
 		$res = $event->updateKejadian($data);
 		echo json_encode($res);
 	}
+	
+	if($_POST["operation"] == "edit" && $_POST["table"] == "berita"){
+		$event = new Event($db);
+		$data = array(
+			'id' => $_POST['id'],
+			'isi' => $_POST['isi_berita']
+		);
+		$res = $event->updateBerita($data);
+		echo json_encode($res);
+	}
 ?>

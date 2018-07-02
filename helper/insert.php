@@ -124,13 +124,62 @@
 			'long' => $_POST['long'],
 			'addr' => $_POST['addr'],
 			'isi' => $_POST['isi_kejadian'],
-			'kasus' => 1,
+			'kasus' => $_POST['kasus'],
 			'admin' => $_SESSION['admin_session']
 		);
 		
 		$res = $event->insertKejadian($data);
 		echo json_encode($res);
 	}
+	
+	/*
+	* admin
+	* Input Berita
+	*/
+	if($_POST["operation"] == "add" && $_POST["table"] == "berita"){
+		$event = new Event($db);
+		$admin = new Admin($db);
+		
+		$imgFile = $_FILES['gambar']['name'];
+		$tmp_dir = $_FILES['gambar']['tmp_name'];
+		$imgSize = $_FILES['gambar']['size'];
 
+
+		if(empty($imgFile)) {
+			$errMsg = "File gambar belum dipilih..";
+		} else {
+			$upload_dir = '../gambar/'; // upload directory
+	 
+			$imgExt = strtolower(pathinfo($imgFile,PATHINFO_EXTENSION)); // get image extension
+		  
+			// valid image extensions
+			$valid_extensions = array('jpeg', 'jpg', 'png', 'gif'); // valid extensions
+		  
+			// rename uploading image
+			$userpic = rand(1000,1000000).".".$imgExt;
+
+			// allow valid image file formats
+			if(in_array($imgExt, $valid_extensions)){   
+				// Check file size '5MB'
+				if($imgSize < 5000000)    {
+				  move_uploaded_file($tmp_dir,$upload_dir.$userpic);
+				} else {
+				  $errMSG = "Maaf, ukuran file anda terlalu besar.";
+				}
+			} else {
+				$errMSG = "Maaf, hanya ekstensi JPG, JPEG, PNG & GIF yang diterima.";  
+			}
+		}
+		
+		$data = array(
+			'judul' => $_POST['judul'],
+			'gambar' => $userpic,
+			'isi' => $_POST['isi_berita'],
+			'admin' => $_SESSION['admin_session']
+		);
+		
+		$res = $event->insertBerita($data);
+		echo json_encode($res);
+	}
   }
 ?>

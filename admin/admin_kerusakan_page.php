@@ -11,9 +11,9 @@
 	<div class="container" id="contains">
 		<div class="card">
 			<div class="card-header">
-				<a href="#" class="input_kerusakan" onclick="loadPage('input_kejadian.php', inputFunc)">Input Kejadian</a>
+				<a href="#" class="input_kerusakan" onclick="loadPage('input_kerusakan.php', inputFunc)">Input Kerusakan</a>
 				|
-				<a href="#" class="data_kerusakan" onclick="loadPage('data_kejadian.php', dataFunc)">Data Kejadian</a>
+				<a href="#" class="data_kerusakan" onclick="loadPage('data_kerusakan.php', dataFunc)">Data Kerusakan</a>
 			</div>
 			<div class="card-body">
 				<div id="isi"></div>
@@ -46,7 +46,7 @@ var maps = function(){
 
 var callTinyMce = function(){
 	tinymce.init({
-		selector : '#isi_kerusakan',
+		selector : '#isi_kejadian',
 		theme: 'modern',
 		height: 300,
 		plugins: [
@@ -87,35 +87,37 @@ var editFunc = function(){
 loadPage('input_kerusakan.php', inputFunc);
 
 $(document).on('submit', '#kerusakan_form', function(event){
-  event.preventDefault();
-  var table = 'kerusakan';
-  var operation = 'add';
-  var formData = new FormData(this);
-  formData.append('table', table);
-  formData.append('operation', operation);
-  $.ajax({
-    url: base_url+"helper/insert.php",
-    method:'POST',
-    data:formData,
-    contentType:false,
-    processData:false,
-    dataType:"json",
-    success:function(data)
-    {
-		if(data.msg == 'suc'){
-			$.alert(data.print);
-			$('#kerusakan_form')[0].reset();
+	event.preventDefault();
+	var table = 'kejadian';
+	var operation = 'add';
+	var kasus = '2';
+	var formData = new FormData(this);
+	formData.append('table', table);
+	formData.append('operation', operation);
+	formData.append('kasus', kasus);
+	$.ajax({
+		url: base_url+"helper/insert.php",
+		method:'POST',
+		data:formData,
+		contentType:false,
+		processData:false,
+		dataType:"json",
+		success:function(data)
+		{
+			if(data.msg == 'suc'){
+				$.alert(data.print);
+				$('#kerusakan_form')[0].reset();
+			}
+			if(data.msg == 'err'){
+				$.alert(data.print);
+			}
 		}
-		if(data.msg == 'err'){
-			$.alert(data.print);
-		}
-    }
-  });
+	});
 });
 
 $(document).on('submit', '#edit_kerusakan_form', function(event){
   event.preventDefault();
-  var table = 'kerusakan';
+  var table = 'kejadian';
   var operation = 'edit';
   var formData = new FormData(this);
   formData.append('table', table);
@@ -158,6 +160,7 @@ var tabelKerusakan = function(){
 	var dataTable = $('#data_kerusakan').DataTable({
 		"processing":true,
 		"serverSide":true,
+		"destroy": true,
 		"order":[],
 		"ajax":{
 			url:base_url+"helper/read.php",
@@ -177,7 +180,7 @@ var tabelKerusakan = function(){
 
 $(document).on('click', '.delete', function(){
     var ids = $(this).attr("id");
-    var tbl = 'kerusakan';
+    var tbl = 'kejadian';
     var opr = 'delete';
 	$.confirm({
 		title: 'Confirm!',
@@ -188,11 +191,12 @@ $(document).on('click', '.delete', function(){
 					url:base_url+"helper/delete.php",
 					method:"POST",
 					data:{id:ids,table:tbl,operation:opr},
+					dataType:"json",
 					success:function(data)
 					{
 						if(data.msg == 'suc'){
 							$.alert(data.print);
-							$('#data_kejadian').ajax.reload();
+							$('#data_kerusakan').DataTable().ajax.reload();
 						}
 						if(data.msg == 'err'){
 							$.alert(data.print);
@@ -210,7 +214,7 @@ $(document).on('click', '.delete', function(){
  
  $(document).on('click', '.edit', function(){
 	var ids = $(this).attr("id");
-    var tbl = 'kerusakan';
+    var tbl = 'kejadian';
     var opr = 'readOne';
 	$.confirm({
 		title: 'Confirm!',
@@ -225,11 +229,13 @@ $(document).on('click', '.delete', function(){
 					success:function(data)
 					{
 						loadPage('edit_kerusakan.php', editFunc);
+						openModalLoader();
 						setTimeout(function()
 						{ 
 							$('#id').val(data.id);
 							$('#edit_judul').val(data.judul);
-							tinymce.get("isi_kerusakan").setContent(data.isi);
+							tinymce.get("isi_kejadian").setContent(data.isi);
+							closeModalLoader();
 						}, 3000);
 					}
 				});
