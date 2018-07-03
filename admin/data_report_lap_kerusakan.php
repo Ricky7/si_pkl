@@ -9,7 +9,7 @@
 		<button type="submit" onclick="fetchTable('lapKerusakan','data_report_lap_kerusakan')" class="btn btn-xs btn-default">Submit</button>
 	</div>
 	<div class="col-md-1">
-		<button type="submit" class="btn btn-xs btn-primary">Export</button>
+		<button type="submit" onclick="fetchExcel('lapKerusakan')" class="btn btn-xs btn-primary">Export</button>
 	</div>
 </div>
 <div class="table-responsive">

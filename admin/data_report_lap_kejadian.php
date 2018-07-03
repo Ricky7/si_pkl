@@ -9,7 +9,7 @@
 		<button type="submit" onclick="fetchTable('lapKejadian','data_report_lap_kejadian')" class="btn btn-xs btn-default">Submit</button>
 	</div>
 	<div class="col-md-1">
-		<button type="submit" class="btn btn-xs btn-primary">Export</button>
+		<button type="submit" onclick="fetchExcel('lapKejadian')" class="btn btn-xs btn-primary">Export</button>
 	</div>
 </div>
 <div class="table-responsive">

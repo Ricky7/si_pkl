@@ -232,6 +232,30 @@
 			return $output;
 		}
 		
+		public function exportKeluhan($data = array())
+		{
+			$output = array();
+			$statement = $this->db->prepare(
+				"SELECT a.id as idL,a.judul, a.lokasi, a.tgl_lapor, b.nama 
+				FROM laporan a INNER JOIN users b ON (b.id = a.id_user) 
+					WHERE DATE(a.tgl_lapor) 
+					BETWEEN '".$_POST['frm']."' AND '".$_POST['to']."' AND a.jenis_laporan = '".$data['kasus']."' "
+			);
+			$statement->execute();
+			$result = $statement->fetchAll();
+			$i = 1; 
+			foreach($result as $row)
+			{
+				$output[$i]['id'] = $row["idL"];
+				$output[$i]["judul"] = $row["judul"];
+				$output[$i]["lokasi"] = $row["lokasi"];
+				$output[$i]["pelapor"] = $row["nama"];
+				$output[$i]["tanggal"] = $row["tgl_lapor"];
+				$i++;
+			}
+			return $output;
+		}
+		
 		public function total_records($table)
 		{
 			$statement = $this->db->prepare("SELECT * FROM {$table}");

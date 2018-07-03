@@ -623,5 +623,127 @@
 		);
 		echo json_encode($response);
 	}
+	
+	if($_POST["operation"] == "export" && $_POST["table"] == "lapKerusakan"){
+		
+		$event = new Event($db);
+		$spreadsheet = new Spreadsheet();
+		$sheet = $spreadsheet->getActiveSheet();
+		$sheet->setCellValue('A2', 'SISTEM INFORMASI PENGADUAN');
+		$sheet->mergeCells('A2:C2');
+		$sheet->setCellValue('A4', 'Periode');
+		$sheet->setCellValue('B4', 'Judul');
+		$sheet->setCellValue('A5', $_POST['frm']." - ".$_POST['to']);
+		$sheet->setCellValue('B5', 'Laporan Keluhan Kerusakan');
+		$sheet->mergeCells('B5:C5');
+		
+		//header
+		$sheet->setCellValue('A7', 'Judul');
+		$sheet->setCellValue('B7', 'Lokasi');
+		$sheet->setCellValue('C7', 'Pelapor');
+		$sheet->setCellValue('D7', 'Tanggal');
+		
+		$arr = array(
+			'from' => $_POST['frm'],
+			'to' => $_POST['to'],
+			'kasus' => 'kerusakan'
+		);
+		
+		$data = $event->exportKeluhan($arr);
+		
+		$no = 1;
+		$num_row = 8;
+		foreach ($data as $row) {
+		  $sheet->setCellValue('A'.$num_row, $row['judul']);
+		  $sheet->setCellValue('B'.$num_row, $row['lokasi']);
+		  $sheet->setCellValue('C'.$num_row, $row['pelapor']);
+		  $sheet->setCellValue('D'.$num_row, $row['tanggal']);
+		  $no++;
+		  $num_row++;
+		}
+		
+		$sheet->getColumnDimension('A')->setWidth(60);
+		$sheet->getColumnDimension('B')->setWidth(30);
+		$sheet->getColumnDimension('C')->setWidth(20);
+		$sheet->getColumnDimension('D')->setWidth(20);
+		
+		header('Content-Type: application/vnd.ms-excel');
+		header('Content-Disposition: attachment;filename="Laporan Keluhan Kerusakan.xlsx"'); /*-- $filename is  xsl filename ---*/
+		header('Cache-Control: max-age=0');
+
+		$writer = new Xlsx($spreadsheet);
+
+		ob_start();
+		$writer->save('php://output');
+		$xlsData = ob_get_contents();
+		ob_end_clean();
+		$response =  array(
+			'name' => 'Laporan Keluhan Kerusakan',
+			'op' => $_POST['frm'].' - '.$_POST['to'],
+			'file' => "data:application/vnd.ms-excel;base64,".base64_encode($xlsData)
+		);
+		echo json_encode($response);
+	}
+	
+	if($_POST["operation"] == "export" && $_POST["table"] == "lapKejadian"){
+		
+		$event = new Event($db);
+		$spreadsheet = new Spreadsheet();
+		$sheet = $spreadsheet->getActiveSheet();
+		$sheet->setCellValue('A2', 'SISTEM INFORMASI PENGADUAN');
+		$sheet->mergeCells('A2:C2');
+		$sheet->setCellValue('A4', 'Periode');
+		$sheet->setCellValue('B4', 'Judul');
+		$sheet->setCellValue('A5', $_POST['frm']." - ".$_POST['to']);
+		$sheet->setCellValue('B5', 'Laporan Keluhan Kejadian');
+		$sheet->mergeCells('B5:C5');
+		
+		//header
+		$sheet->setCellValue('A7', 'Judul');
+		$sheet->setCellValue('B7', 'Lokasi');
+		$sheet->setCellValue('C7', 'Pelapor');
+		$sheet->setCellValue('D7', 'Tanggal');
+		
+		$arr = array(
+			'from' => $_POST['frm'],
+			'to' => $_POST['to'],
+			'kasus' => 'kejadian'
+		);
+		
+		$data = $event->exportKeluhan($arr);
+		
+		$no = 1;
+		$num_row = 8;
+		foreach ($data as $row) {
+		  $sheet->setCellValue('A'.$num_row, $row['judul']);
+		  $sheet->setCellValue('B'.$num_row, $row['lokasi']);
+		  $sheet->setCellValue('C'.$num_row, $row['pelapor']);
+		  $sheet->setCellValue('D'.$num_row, $row['tanggal']);
+		  $no++;
+		  $num_row++;
+		}
+		
+		$sheet->getColumnDimension('A')->setWidth(60);
+		$sheet->getColumnDimension('B')->setWidth(30);
+		$sheet->getColumnDimension('C')->setWidth(20);
+		$sheet->getColumnDimension('D')->setWidth(20);
+		
+		header('Content-Type: application/vnd.ms-excel');
+		header('Content-Disposition: attachment;filename="Laporan Keluhan Kejadian.xlsx"'); /*-- $filename is  xsl filename ---*/
+		header('Cache-Control: max-age=0');
+
+		$writer = new Xlsx($spreadsheet);
+
+		ob_start();
+		$writer->save('php://output');
+		$xlsData = ob_get_contents();
+		ob_end_clean();
+		$response =  array(
+			'name' => 'Laporan Keluhan Kejadian',
+			'op' => $_POST['frm'].' - '.$_POST['to'],
+			'file' => "data:application/vnd.ms-excel;base64,".base64_encode($xlsData)
+		);
+		echo json_encode($response);
+	}
   }
 ?>

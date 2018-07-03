@@ -16,6 +16,7 @@
   <header class="py-5 bg-image-full" style="background-image: url('https://unsplash.it/1900/1080?image=1076');">
     <img class="img-fluid d-block mx-auto" src="images/Lambang_Polri.png" width="150px" height="150px" alt="">
   </header>
+   
 
   <!-- Content section -->
   <section class="py-5">
@@ -26,6 +27,8 @@
     </div>
   </section>
 
+  
+  
   <!-- Image Section - set the background image for the header in the line below -->
   <section class="py-5 bg-image-full" style="background-image: url('https://unsplash.it/1900/1080?image=1081');">
     <!-- Put anything you want here! There is just a spacer below for demo purposes! -->
