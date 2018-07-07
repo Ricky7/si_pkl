@@ -14,7 +14,7 @@
 
   <!-- Header - set the background image for the header in the line below -->
   <header class="py-5 bg-image-full" style="background-image: url('https://unsplash.it/1900/1080?image=1076');">
-    <img class="img-fluid d-block mx-auto" src="images/Lambang_Polri.png" width="150px" height="150px" alt="">
+    <img class="img-fluid d-block mx-auto" src="images/logo_polantas.png" width="150px" height="150px" alt="">
   </header>
    
 
@@ -26,25 +26,81 @@
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, suscipit, rerum quos facilis repellat architecto commodi officia atque nemo facere eum non illo voluptatem quae delectus odit vel itaque amet.</p>
     </div>
   </section>
+	
+	<div class="container">
+		<div class="row" style="margin-bottom:30px;"> 
+			<div class="col-md-8">
+				<!-- slider -->
+				<div id="demo" class="carousel slide" data-ride="carousel">
 
-  
-  
-  <!-- Image Section - set the background image for the header in the line below -->
-  <section class="py-5 bg-image-full" style="background-image: url('https://unsplash.it/1900/1080?image=1081');">
-    <!-- Put anything you want here! There is just a spacer below for demo purposes! -->
-    <div style="height: 200px;"></div>
-  </section>
+					<!-- Indicators -->
+					<ul class="carousel-indicators">
+						<li data-target="#demo" data-slide-to="0" class="active"></li>
+						<li data-target="#demo" data-slide-to="1"></li>
+						<li data-target="#demo" data-slide-to="2"></li>
+					</ul>
 
-  <!-- Content section -->
-  <section class="py-5">
-    <div class="container">
-      <h1>Section Heading</h1>
-      <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, suscipit, rerum quos facilis repellat architecto commodi officia atque nemo facere eum non illo voluptatem quae delectus odit vel itaque amet.</p>
-    </div>
-  </section>
+					<!-- The slideshow -->
+					<div class="carousel-inner">
+						<div class="carousel-item active">
+							<img src="images/noimage.png" style="width:720px;height:400px;">
+							<strong>Images 1</strong>
+						</div>
+						<div class="carousel-item">
+							<img src="images/noimage.png" style="width:720px;height:400px;">
+							<strong>Images 2</strong>
+						</div>
+						<div class="carousel-item">
+							<img src="images/noimage.png" style="width:720px;height:400px;">
+						</div>
+					</div>
 
+					<!-- Left and right controls -->
+					<a class="carousel-control-prev" href="#demo" data-slide="prev">
+						<span class="carousel-control-prev-icon"></span>
+					</a>
+					<a class="carousel-control-next" href="#demo" data-slide="next">
+						<span class="carousel-control-next-icon"></span>
+					</a>
 
+				</div>
+			</div>
+			<div class="col-md-4 rightnews">
+				<div class="card" style="margin-bottom:15px;height:100px;">
+					<div class="card-body">
+						<div class="row">
+							<div class="col-md-3">
+								<img src="images/noimage.png" style="width:60px;height:60px;">
+							</div>
+							<div class="col-md-9">
+								<h6>Lorem ipsum dolor sit amet, consectetur </h6>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	  
+		<div class="row">
+			<div class="col-md-12">
+				<!-- Image Section - set the background image for the header in the line below -->
+				<section class="py-5 bg-image-full" style="background-image: url('https://unsplash.it/1900/1080?image=1081');">
+					<!-- Put anything you want here! There is just a spacer below for demo purposes! -->
+					<div style="height: 200px;"></div>
+				</section>
+
+				<!-- Content section -->
+				<section class="py-5">
+					<div class="container">
+						<h1>Section Heading</h1>
+						<p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, suscipit, rerum quos facilis repellat architecto commodi officia atque nemo facere eum non illo voluptatem quae delectus odit vel itaque amet.</p>
+					</div>
+			  </section>
+			</div>
+		</div>
+	</div>
+ 
   <!-- register modal -->
   <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
