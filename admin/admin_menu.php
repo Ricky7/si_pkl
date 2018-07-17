@@ -29,6 +29,8 @@
 			  <a class="dropdown-item" href="admin_kejadian_page.php">Kejadian</a>
 			  <div class="dropdown-divider"></div>
 			  <a class="dropdown-item" href="admin_kerusakan_page.php">Kerusakan</a>
+			  <div class="dropdown-divider"></div>
+			  <a class="dropdown-item" href="admin_kecelakaan_page.php">Kecelakaan</a>
 			</div>
 		</li>
 		<li class="nav-item">

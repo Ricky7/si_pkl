@@ -255,7 +255,162 @@
 			}
 			return $output;
 		}
+
+		public function insertKecelakaan($data_laka = array(), $data_pengemudi = array(), $data_penumpang = array(), $data_saksi = array(), $data_tersangka = array(), $data_korban = array())
+		{
+			try
+			  {
+				$this->db->beginTransaction();	
+				$this->setLaka($data_laka);
+				$lastId = $this->db->lastInsertId();
+				$this->setPengemudi($data_pengemudi, $lastId);
+				$this->setPenumpang($data_penumpang, $lastId);
+				$this->setSaksi($data_saksi, $lastId);
+				$this->setTersangka($data_tersangka, $lastId);
+				$this->setKorban($data_korban, $lastId);
+				$this->db->commit();
+
+				return $this->output('suc','Berhasil Melapor');
+			  }catch(PDOException $e){
+				  // Jika terjadi error
+				$this->db->rollBack();
+				return $this->output('err',$e->getMessage());
+			  }
+		}
+
+		private function setLaka($data = array())
+		{
+			$add = $this->db->prepare("
+				INSERT INTO kecelakaan(kode, tanggal, lokasi, lat, lng, gambar, keterangan, info_jalan, admin_id, createAt, updateAt)
+				VALUES (:kode, :tanggal, :lokasi, :lat, :lng, :gambar, :ket, :info_jalan, :admin_id, NOW(), NOW());
+			");
+			$add->bindParam(":kode", $data['kode']);
+			$add->bindParam(":tanggal", $data['tanggal']);
+			$add->bindParam(":lokasi", $data['lokasi']);
+			$add->bindParam(":lat", $data['lat']);
+			$add->bindParam(":lng", $data['lng']);
+			$add->bindParam(":gambar", $data['gambar']);
+			$add->bindParam(":ket", $data['keterangan']);
+			$add->bindParam(":info_jalan", $data['info_jalan']);
+			$add->bindParam(":admin_id", $data['admin_id']);
+			$add->execute();
+		}
+
+		private function setPengemudi($data = array(), $laka_id)
+		{
+			if(!$this->arrayNull($data))
+			{
+				$add = $this->db->prepare("
+					INSERT INTO pengemudi(nama, alamat, umur, no_ktp, no_sim, jenis_sim, jenis_kelamin, info_tambahan, kecelakaan_id)
+					VALUES (:nama, :alamat, :umur, :no_ktp, :no_sim, :jenis_sim, :jenis_kelamin, :info_extra, :laka_id);	
+				");
+
+				$add->bindParam(":nama", $data['nama']);
+				$add->bindParam(":alamat", $data['alamat']);
+				$add->bindParam(":umur", $data['umur']);
+				$add->bindParam(":no_ktp", $data['no_ktp']);
+				$add->bindParam(":no_sim", $data['no_sim']);
+				$add->bindParam(":jenis_sim", $data['jenis_sim']);
+				$add->bindParam(":jenis_kelamin", $data['jenis_kelamin']);
+				$add->bindParam(":info_extra", $data['info_extra']);
+				$add->bindParam(":laka_id", $laka_id);
+				$add->execute();
+			}
+		}
+
+		private function setPenumpang($data = array(), $laka_id)
+		{
+			if(!$this->arrayNull($data))
+			{
+				$add = $this->db->prepare("
+					INSERT INTO penumpang(nama, alamat, umur, no_ktp, info_cedera, jenis_kelamin, info_tambahan, kecelakaan_id)
+					VALUES (:nama, :alamat, :umur, :no_ktp, :info_cedera, :jenis_kelamin, :info_extra, :laka_id);
+				");
+
+				$add->bindParam(":nama", $data['nama']);
+				$add->bindParam(":alamat", $data['alamat']);
+				$add->bindParam(":umur", $data['umur']);
+				$add->bindParam(":no_ktp", $data['no_ktp']);
+				$add->bindParam(":info_cedera", $data['info_cedera']);
+				$add->bindParam(":jenis_kelamin", $data['jenis_kelamin']);
+				$add->bindParam(":info_extra", $data['info_extra']);
+				$add->bindParam(":laka_id", $laka_id);
+				$add->execute();
+			}
+		}
+
+		private function setSaksi($data = array(), $laka_id)
+		{
+			if(!$this->arrayNull($data))
+			{
+				$add = $this->db->prepare("
+					INSERT INTO saksi(nama, no_ktp, umur, alamat, jenis_kelamin, pernyataan, kecelakaan_id)
+					VALUES (:nama, :no_ktp, :umur, :alamat, :jenis_kelamin, :pernyataan, :laka_id);
+				");
+
+				$add->bindParam(":nama", $data['nama']);
+				$add->bindParam(":no_ktp", $data['no_ktp']);
+				$add->bindParam(":umur", $data['umur']);
+				$add->bindParam(":alamat", $data['alamat']);
+				$add->bindParam(":jenis_kelamin", $data['jenis_kelamin']);
+				$add->bindParam(":pernyataan", $data['pernyataan']);
+				$add->bindParam(":laka_id", $laka_id);
+				$add->execute();
+			}
+		}
+
+		private function setTersangka($data = array(), $laka_id)
+		{
+			if(!$this->arrayNull($data))
+			{
+				$add = $this->db->prepare("
+					INSERT INTO tersangka(nama, no_ktp, umur, alamat, jenis_kelamin, pernyataan, kecelakaan_id)
+					VALUES (:nama, :no_ktp, :umur, :alamat, :jenis_kelamin, :pernyataan, :laka_id);
+				");
+
+				$add->bindParam(":nama", $data['nama']);
+				$add->bindParam(":no_ktp", $data['no_ktp']);
+				$add->bindParam(":umur", $data['umur']);
+				$add->bindParam(":alamat", $data['alamat']);
+				$add->bindParam(":jenis_kelamin", $data['jenis_kelamin']);
+				$add->bindParam(":pernyataan", $data['pernyataan']);
+				$add->bindParam(":laka_id", $laka_id);
+				$add->execute();
+			}
+		}
 		
+		private function setKorban($data = array(), $laka_id)
+		{
+			if(!$this->arrayNull($data))
+			{
+				$add = $this->db->prepare("
+					INSERT INTO korban(nama, no_ktp, umur, alamat, jenis_kelamin, pernyataan, status, kecelakaan_id)
+					VALUES (:nama, :no_ktp, :umur, :alamat, :jenis_kelamin, :pernyataan, :status, :laka_id);
+				");
+
+				$add->bindParam(":nama", $data['nama']);
+				$add->bindParam(":no_ktp", $data['no_ktp']);
+				$add->bindParam(":umur", $data['umur']);
+				$add->bindParam(":alamat", $data['alamat']);
+				$add->bindParam(":jenis_kelamin", $data['jenis_kelamin']);
+				$add->bindParam(":pernyataan", $data['pernyataan']);
+				$add->bindParam(":status", $datap['status']);
+				$add->bindParam(":laka_id", $laka_id);
+				$add->execute();
+			}
+		}
+
+		private function arrayNull($data = array())
+		{
+			foreach ($data as $key => $value) {
+				$value = trim($value);
+				if(empty($value))
+					return true;
+				else 
+					return false;
+			}
+		}
+
 		public function total_records($table)
 		{
 			$statement = $this->db->prepare("SELECT * FROM {$table}");
