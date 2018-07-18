@@ -236,7 +236,7 @@
 			$sub_array[] = $row['no_ktp'];
 			$sub_array[] = $row['jenis_kelamin'];
 			$sub_array[] = '
-				<button type="button" name="delete" id="'.$row["id"].'" class="btn btn-danger btn-sm delete">Delete</button>
+				<button type="button" name="delete" id="'.$row["id"].'" data-table="penumpang" class="btn btn-danger btn-sm delete">Delete</button>
 				';
 			$data[] = $sub_array;
 			$num++;
@@ -291,7 +291,7 @@
 			$sub_array[] = $row['no_sim'];
 			$sub_array[] = $row['jenis_kelamin'];
 			$sub_array[] = '
-				<button type="button" name="delete" id="'.$row["id"].'" class="btn btn-danger btn-sm delete">Delete</button>
+				<button type="button" name="delete" id="'.$row["id"].'" data-table="pengemudi" class="btn btn-danger btn-sm delete">Delete</button>
 				';
 			$data[] = $sub_array;
 			$num++;
@@ -344,7 +344,7 @@
 			$sub_array[] = $row['no_ktp'];
 			$sub_array[] = $row['jenis_kelamin'];
 			$sub_array[] = '
-				<button type="button" name="delete" id="'.$row["id"].'" class="btn btn-danger btn-sm delete">Delete</button>
+				<button type="button" name="delete" id="'.$row["id"].'" data-table="saksi" class="btn btn-danger btn-sm delete">Delete</button>
 				';
 			$data[] = $sub_array;
 			$num++;
@@ -397,7 +397,7 @@
 			$sub_array[] = $row['no_ktp'];
 			$sub_array[] = $row['jenis_kelamin'];
 			$sub_array[] = '
-				<button type="button" name="delete" id="'.$row["id"].'" class="btn btn-danger btn-sm delete">Delete</button>
+				<button type="button" name="delete" id="'.$row["id"].'" data-table="tersangka" class="btn btn-danger btn-sm delete">Delete</button>
 				';
 			$data[] = $sub_array;
 			$num++;
@@ -451,7 +451,7 @@
 			$sub_array[] = $row['jenis_kelamin'];
 			$sub_array[] = $row['status'];
 			$sub_array[] = '
-				<button type="button" name="delete" id="'.$row["id"].'" class="btn btn-danger btn-sm delete">Delete</button>
+				<button type="button" name="delete" id="'.$row["id"].'" data-table="korban" class="btn btn-danger btn-sm delete">Delete</button>
 				';
 			$data[] = $sub_array;
 			$num++;

@@ -24,6 +24,25 @@
 	</div>
 <?php include "admin_footer.php"; ?>
 
+<!-- add data modal -->
+<div class="modal fade" id="addDataModal" tabindex="-1" role="dialog" aria-labelledby="addDataModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+		<div class="modal-header">
+			<h5 class="modal-title" id="exampleModalLabel">Add Data</h5>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<div class="modal-body">
+			<div id="extraAdd"></id>
+		</div>
+		<div class="modal-footer">
+
+		</div>
+      </div>
+    </div>
+  </div>
 <script type="text/javascript">
 var tinymceScript = function(){
 	$.getScript( base_url+"js/tinymce/tinymce.min.js", function( data, textStatus, jqxhr ) {
@@ -45,6 +64,20 @@ var maps = function(){
 			'formatted_address': '.formatted_address'
 		}
 	});	
+}
+
+var modalCall = function (adrr){
+	setTimeout(() => {
+		var address = adrr;
+		var id = $('#id').val();
+		$.ajax({
+			url: address,
+			success: function(result){
+				$('#extraAdd').html(result);
+				$('#k_id').val(id);
+			}
+		});
+	}, 1000);
 }
 
 var callTinyMce = function(){
@@ -250,4 +283,38 @@ var extraData = function(kid, table, datatable){
 		],
 	});
 }
+
+$(document).on('click', '.delete', function(){
+    var ids = $(this).attr("id");
+    var tbl = $(this).attr("data-table");
+    var opr = 'delete';
+	$.confirm({
+		title: 'Confirm!',
+		content: 'Hapus Data ?',
+		buttons: {
+			confirm: function () {
+				$.ajax({
+					url:base_url+"helper/delete.php",
+					method:"POST",
+					data:{id:ids,table:tbl,operation:opr},
+					dataType:"json",
+					success:function(data)
+					{
+						if(data.msg == 'suc'){
+							$.alert(data.print);
+							$('#data_'+tbl).DataTable().ajax.reload();
+						}
+						if(data.msg == 'err'){
+							$.alert(data.print);
+						}
+					  
+					}
+				});
+			},
+			cancel: function () {
+				$.alert('Hapus dibatalkan');
+			},
+		}
+	});
+ });
 </script>

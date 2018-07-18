@@ -257,6 +257,23 @@
 				return $this->output('err', $e->getMessage());
 			}
 		}
+
+		public function delData($id, $table)
+		{
+			try {
+				$statement = $this->db->prepare(
+					"DELETE FROM ".$table." WHERE id = :id"
+				);
+				$result = $statement->execute(
+					array(
+						':id'	=>	$id
+					)
+				);
+				return $this->output('suc', 'Berhasil Dihapus');
+			}catch(PDOException $e){
+				return $this->output('err', $e->getMessage());
+			}
+		}
 		
 		public function exportKejadian($data = array())
 		{

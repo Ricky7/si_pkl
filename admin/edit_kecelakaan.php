@@ -58,6 +58,7 @@
 					<h6>Data Pengemudi</h6>
 				</div>
 				<div class="card-body">
+                    <a href="#" data-toggle="modal" onclick="modalCall('input_pengemudi.php')" data-target="#addDataModal">+ Add Data</a>
                     <table id="data_pengemudi" class="table table-bordered table-striped">
                         <thead>
                             <th width="3%">#</th>

@@ -23,4 +23,33 @@
 		echo json_encode($result);
 	}
 	
+	if($_POST["operation"] == "delete" && $_POST["table"] == "pengemudi"){
+		$event = new Event($db);
+		$result = $event->delData($_POST['id'],$_POST["table"]);
+		echo json_encode($result);
+	}
+
+	if($_POST["operation"] == "delete" && $_POST["table"] == "penumpang"){
+		$event = new Event($db);
+		$result = $event->delData($_POST['id'],$_POST["table"]);
+		echo json_encode($result);
+	}
+
+	if($_POST["operation"] == "delete" && $_POST["table"] == "saksi"){
+		$event = new Event($db);
+		$result = $event->delData($_POST['id'],$_POST["table"]);
+		echo json_encode($result);
+	}
+
+	if($_POST["operation"] == "delete" && $_POST["table"] == "tersangka"){
+		$event = new Event($db);
+		$result = $event->delData($_POST['id'],$_POST["table"]);
+		echo json_encode($result);
+	}
+
+	if($_POST["operation"] == "delete" && $_POST["table"] == "korban"){
+		$event = new Event($db);
+		$result = $event->delData($_POST['id'],$_POST["table"]);
+		echo json_encode($result);
+	}
 ?>
