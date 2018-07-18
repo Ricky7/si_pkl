@@ -35,6 +35,11 @@
 		$event->fetchKejadian($_POST['id']);
 	}
 	
+	if($_POST["operation"] == "readOne" && $_POST["table"] == "kecelakaan"){
+		$event = new Event($db);
+		$event->fetchKecelakaan($_POST['id']);
+	}
+
 	if($_POST["operation"] == "read" && $_POST["table"] == "kejadian"){
 		$event = new Event($db);
 		$query = '';
@@ -187,6 +192,274 @@
 			"draw"				=>	intval($_POST["draw"]),
 			"recordsTotal"		=> 	$filtered_rows,
 			"recordsFiltered"	=>	$event->total_records('kejadian'),
+			"data"				=>	$data
+		);
+		echo json_encode($output);
+	}
+
+	// data penumpang
+	if($_POST["operation"] == "read" && $_POST["table"] == "penumpang"){
+		$event = new Event($db);
+		$query = '';
+		$output = array();
+		$query .= "SELECT id, nama, alamat, umur, no_ktp, jenis_kelamin
+					FROM penumpang WHERE kecelakaan_id = '".$_POST['kecelakaan_id']."' ";
+		if(isset($_POST["search"]["value"]))
+		{
+			$query .= 'AND nama LIKE "%'.$_POST["search"]["value"].'%" ';
+		}
+		if(isset($_POST["order"]))
+		{
+			$query .= 'ORDER BY '.$_POST['order']['0']['column'].' '.$_POST['order']['0']['dir'].' ';
+		}
+		else
+		{
+			$query .= 'ORDER BY id DESC ';
+		}
+		if($_POST["length"] != -1)
+		{
+			$query .= 'LIMIT ' . $_POST['start'] . ', ' . $_POST['length'];
+		}
+		$statement = $db->prepare($query);
+		$statement->execute();
+		$result = $statement->fetchAll();
+		$data = array();
+		$filtered_rows = $statement->rowCount();
+		$num = 1;
+		foreach($result as $row)
+		{
+			$sub_array = array();
+			$sub_array[] = $num;
+			$sub_array[] = $row['nama'];
+			$sub_array[] = $row['alamat'];
+			$sub_array[] = $row['umur'];
+			$sub_array[] = $row['no_ktp'];
+			$sub_array[] = $row['jenis_kelamin'];
+			$sub_array[] = '
+				<button type="button" name="delete" id="'.$row["id"].'" class="btn btn-danger btn-sm delete">Delete</button>
+				';
+			$data[] = $sub_array;
+			$num++;
+		}
+		$output = array(
+			"draw"				=>	intval($_POST["draw"]),
+			"recordsTotal"		=> 	$filtered_rows,
+			"recordsFiltered"	=>	$event->total_records('penumpang'),
+			"data"				=>	$data
+		);
+		echo json_encode($output);
+	} 
+	
+	// data pengemudi
+	if($_POST["operation"] == "read" && $_POST["table"] == "pengemudi"){
+		$event = new Event($db);
+		$query = '';
+		$output = array();
+		$query .= "SELECT id, nama, alamat, umur, no_ktp, no_sim, jenis_sim, jenis_kelamin
+					FROM pengemudi WHERE kecelakaan_id = '".$_POST['kecelakaan_id']."' ";
+		if(isset($_POST["search"]["value"]))
+		{
+			$query .= 'AND nama LIKE "%'.$_POST["search"]["value"].'%" ';
+		}
+		if(isset($_POST["order"]))
+		{
+			$query .= 'ORDER BY '.$_POST['order']['0']['column'].' '.$_POST['order']['0']['dir'].' ';
+		}
+		else
+		{
+			$query .= 'ORDER BY id DESC ';
+		}
+		if($_POST["length"] != -1)
+		{
+			$query .= 'LIMIT ' . $_POST['start'] . ', ' . $_POST['length'];
+		}
+		$statement = $db->prepare($query);
+		$statement->execute();
+		$result = $statement->fetchAll();
+		$data = array();
+		$filtered_rows = $statement->rowCount();
+		$num = 1;
+		foreach($result as $row)
+		{
+			$sub_array = array();
+			$sub_array[] = $num;
+			$sub_array[] = $row['nama'];
+			$sub_array[] = $row['alamat'];
+			$sub_array[] = $row['umur'];
+			$sub_array[] = $row['no_ktp'];
+			$sub_array[] = $row['jenis_sim'];
+			$sub_array[] = $row['no_sim'];
+			$sub_array[] = $row['jenis_kelamin'];
+			$sub_array[] = '
+				<button type="button" name="delete" id="'.$row["id"].'" class="btn btn-danger btn-sm delete">Delete</button>
+				';
+			$data[] = $sub_array;
+			$num++;
+		}
+		$output = array(
+			"draw"				=>	intval($_POST["draw"]),
+			"recordsTotal"		=> 	$filtered_rows,
+			"recordsFiltered"	=>	$event->total_records('pengemudi'),
+			"data"				=>	$data
+		);
+		echo json_encode($output);
+	} 
+
+	// data saksi
+	if($_POST["operation"] == "read" && $_POST["table"] == "saksi"){
+		$event = new Event($db);
+		$query = '';
+		$output = array();
+		$query .= "SELECT id, nama, alamat, umur, no_ktp, jenis_kelamin
+					FROM saksi WHERE kecelakaan_id = '".$_POST['kecelakaan_id']."' ";
+		if(isset($_POST["search"]["value"]))
+		{
+			$query .= 'AND nama LIKE "%'.$_POST["search"]["value"].'%" ';
+		}
+		if(isset($_POST["order"]))
+		{
+			$query .= 'ORDER BY '.$_POST['order']['0']['column'].' '.$_POST['order']['0']['dir'].' ';
+		}
+		else
+		{
+			$query .= 'ORDER BY id DESC ';
+		}
+		if($_POST["length"] != -1)
+		{
+			$query .= 'LIMIT ' . $_POST['start'] . ', ' . $_POST['length'];
+		}
+		$statement = $db->prepare($query);
+		$statement->execute();
+		$result = $statement->fetchAll();
+		$data = array();
+		$filtered_rows = $statement->rowCount();
+		$num = 1;
+		foreach($result as $row)
+		{
+			$sub_array = array();
+			$sub_array[] = $num;
+			$sub_array[] = $row['nama'];
+			$sub_array[] = $row['alamat'];
+			$sub_array[] = $row['umur'];
+			$sub_array[] = $row['no_ktp'];
+			$sub_array[] = $row['jenis_kelamin'];
+			$sub_array[] = '
+				<button type="button" name="delete" id="'.$row["id"].'" class="btn btn-danger btn-sm delete">Delete</button>
+				';
+			$data[] = $sub_array;
+			$num++;
+		}
+		$output = array(
+			"draw"				=>	intval($_POST["draw"]),
+			"recordsTotal"		=> 	$filtered_rows,
+			"recordsFiltered"	=>	$event->total_records('saksi'),
+			"data"				=>	$data
+		);
+		echo json_encode($output);
+	}
+	
+	// data tersangka
+	if($_POST["operation"] == "read" && $_POST["table"] == "tersangka"){
+		$event = new Event($db);
+		$query = '';
+		$output = array();
+		$query .= "SELECT id, nama, alamat, umur, no_ktp, jenis_kelamin
+					FROM tersangka WHERE kecelakaan_id = '".$_POST['kecelakaan_id']."' ";
+		if(isset($_POST["search"]["value"]))
+		{
+			$query .= 'AND nama LIKE "%'.$_POST["search"]["value"].'%" ';
+		}
+		if(isset($_POST["order"]))
+		{
+			$query .= 'ORDER BY '.$_POST['order']['0']['column'].' '.$_POST['order']['0']['dir'].' ';
+		}
+		else
+		{
+			$query .= 'ORDER BY id DESC ';
+		}
+		if($_POST["length"] != -1)
+		{
+			$query .= 'LIMIT ' . $_POST['start'] . ', ' . $_POST['length'];
+		}
+		$statement = $db->prepare($query);
+		$statement->execute();
+		$result = $statement->fetchAll();
+		$data = array();
+		$filtered_rows = $statement->rowCount();
+		$num = 1;
+		foreach($result as $row)
+		{
+			$sub_array = array();
+			$sub_array[] = $num;
+			$sub_array[] = $row['nama'];
+			$sub_array[] = $row['alamat'];
+			$sub_array[] = $row['umur'];
+			$sub_array[] = $row['no_ktp'];
+			$sub_array[] = $row['jenis_kelamin'];
+			$sub_array[] = '
+				<button type="button" name="delete" id="'.$row["id"].'" class="btn btn-danger btn-sm delete">Delete</button>
+				';
+			$data[] = $sub_array;
+			$num++;
+		}
+		$output = array(
+			"draw"				=>	intval($_POST["draw"]),
+			"recordsTotal"		=> 	$filtered_rows,
+			"recordsFiltered"	=>	$event->total_records('tersangka'),
+			"data"				=>	$data
+		);
+		echo json_encode($output);
+	}
+
+	// data korban
+	if($_POST["operation"] == "read" && $_POST["table"] == "korban"){
+		$event = new Event($db);
+		$query = '';
+		$output = array();
+		$query .= "SELECT id, nama, alamat, umur, no_ktp, jenis_kelamin, status
+					FROM korban WHERE kecelakaan_id = '".$_POST['kecelakaan_id']."' ";
+		if(isset($_POST["search"]["value"]))
+		{
+			$query .= 'AND nama LIKE "%'.$_POST["search"]["value"].'%" ';
+		}
+		if(isset($_POST["order"]))
+		{
+			$query .= 'ORDER BY '.$_POST['order']['0']['column'].' '.$_POST['order']['0']['dir'].' ';
+		}
+		else
+		{
+			$query .= 'ORDER BY id DESC ';
+		}
+		if($_POST["length"] != -1)
+		{
+			$query .= 'LIMIT ' . $_POST['start'] . ', ' . $_POST['length'];
+		}
+		$statement = $db->prepare($query);
+		$statement->execute();
+		$result = $statement->fetchAll();
+		$data = array();
+		$filtered_rows = $statement->rowCount();
+		$num = 1;
+		foreach($result as $row)
+		{
+			$sub_array = array();
+			$sub_array[] = $num;
+			$sub_array[] = $row['nama'];
+			$sub_array[] = $row['alamat'];
+			$sub_array[] = $row['umur'];
+			$sub_array[] = $row['no_ktp'];
+			$sub_array[] = $row['jenis_kelamin'];
+			$sub_array[] = $row['status'];
+			$sub_array[] = '
+				<button type="button" name="delete" id="'.$row["id"].'" class="btn btn-danger btn-sm delete">Delete</button>
+				';
+			$data[] = $sub_array;
+			$num++;
+		}
+		$output = array(
+			"draw"				=>	intval($_POST["draw"]),
+			"recordsTotal"		=> 	$filtered_rows,
+			"recordsFiltered"	=>	$event->total_records('korban'),
 			"data"				=>	$data
 		);
 		echo json_encode($output);

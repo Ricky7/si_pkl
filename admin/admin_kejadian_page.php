@@ -149,7 +149,7 @@ $(document).on('submit', '#edit_kejadian_form', function(event){
 				});
 			},
 			cancel: function () {
-				$.alert('Hapus dibatalkan');
+				$.alert('Edit dibatalkan');
 			},
 		}
 	});

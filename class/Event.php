@@ -75,6 +75,30 @@
 			}
 			echo json_encode($output);
 		}
+
+		public function fetchKecelakaan($id)
+		{
+			$output = array();
+			$statement = $this->db->prepare(
+				"SELECT *,DATE(tanggal) as tgl FROM kecelakaan
+				WHERE id = '".$id."'
+				LIMIT 1"
+			);
+			$statement->execute();
+			$result = $statement->fetchAll();
+			foreach($result as $row)
+			{
+				$output['id'] = $row['id'];
+				$output['kode'] = $row['kode'];
+				$output['tanggal'] = $row['tgl'];
+				$output['lokasi'] = $row['lokasi'];
+				$output['lat'] = $row['lng'];
+				$output['gambar'] = $row['gambar'];
+				$output['keterangan'] = $row['keterangan'];
+				$output['info_jalan'] = $row['info_jalan'];
+			}
+			echo json_encode($output);
+		}
 		
 		public function updateKejadian($data = array())
 		{
@@ -89,6 +113,32 @@
 				return $this->output('suc', 'Berhasil Diupdate');
 			}catch(PDOException $e){
 				return $this->output('err', $e->getMessage());
+			}
+		}
+
+		public function updateKecelakaan($data = array())
+		{
+			try {
+				$this->db->beginTransaction();
+				$sql = "UPDATE kecelakaan SET ";
+				if(!empty($data['tanggal'])) $sql .= "tanggal = '".$data['tanggal']."', ";
+				if(!empty($data['lokasi'])) $sql .= "lokasi = '".$data['lokasi']."', ";
+				if(!empty($data['lat'])) $sql .= "lat = '".$data['lat']."', ";
+				if(!empty($data['lng'])) $sql .= "lng = '".$data['lng']."', ";
+				if(!empty($data['gambar'])) $sql .= "gambar = '".$data['gambar']."', ";
+				if(!empty($data['keterangan'])) $sql .= "keterangan = '".$data['keterangan']."', ";
+				if(!empty($data['info_jalan'])) $sql .= "info_jalan = '".$data['info_jalan']."', ";
+				$sql .= "updateAt = NOW() WHERE id = '".$data['id']."'";
+
+				$query = $this->db->prepare($sql);
+				$query->execute();
+
+				$this->db->commit();
+
+				return $this->output('suc', 'Berhasil Diupdate');
+			} catch (PDOException $e){
+				$this->db->rollBack();
+				return $this->output('err',$e->getMessage());
 			}
 		}
 		
