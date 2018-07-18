@@ -79,7 +79,7 @@ var inputFunc = function(){
 }
 
 var dataFunc = function(){
-	tabelKejadian();
+	tabelKecelakaan();
 	console.log('run');
 }
 
@@ -115,4 +115,27 @@ $(document).on('submit', '#kecelakaan_form', function(event){
 		}
 	});
 });
+
+var tabelKecelakaan = function(){
+	var opr = 'read';
+	var tbl = 'kecelakaan';
+	var dataTable = $('#data_kecelakaan').DataTable({
+		"processing":true,
+		"serverSide":true,
+		"destroy": true,
+		"order":[],
+		"ajax":{
+			url:base_url+"helper/read.php",
+			type:"POST",
+			data:{operation:opr,table:tbl},
+			dataType:"json"
+		},
+		"columnDefs":[
+		{
+			"targets":[0, 3, 4],
+			"orderable":false,
+		},
+		],
+	});
+}
 </script>
