@@ -581,6 +581,7 @@
 		$event->fetchLaporan($_POST['id']);
 	}
 	
+	// report kejadian
 	if($_POST["operation"] == "readByDate" && $_POST["table"] == "kejadian"){
 		$event = new Event($db);
 		$query = '';
@@ -630,6 +631,7 @@
 		echo json_encode($output);
 	}
 	
+	// report kerusakan
 	if($_POST["operation"] == "readByDate" && $_POST["table"] == "kerusakan"){
 		$event = new Event($db);
 		$query = '';
@@ -674,6 +676,57 @@
 			"draw"				=>	intval($_POST["draw"]),
 			"recordsTotal"		=> 	$filtered_rows,
 			"recordsFiltered"	=>	$event->total_records('kejadian'),
+			"data"				=>	$data
+		);
+		echo json_encode($output);
+	}
+
+	// report kecelakaan
+	if($_POST["operation"] == "readByDate" && $_POST["table"] == "kecelakaan"){
+		$event = new Event($db);
+		$query = '';
+		$output = array();
+		$query .= 'SELECT a.id, a.kode, a.tanggal 
+					FROM kecelakaan a WHERE DATE(a.createAt) BETWEEN "'.$_POST['frm'].'" AND "'.$_POST['to'].'" ';
+		if(isset($_POST["search"]["value"]))
+		{
+			$query .= 'AND a.kode LIKE "%'.$_POST["search"]["value"].'%" ';
+		}
+		if(isset($_POST["order"]))
+		{
+			$query .= 'ORDER BY '.$_POST['order']['0']['column'].' '.$_POST['order']['0']['dir'].' ';
+		}
+		else
+		{
+			$query .= 'ORDER BY a.id DESC ';
+		}
+		if($_POST["length"] != -1)
+		{
+			$query .= 'LIMIT ' . $_POST['start'] . ', ' . $_POST['length'];
+		}
+		$statement = $db->prepare($query);
+		$statement->execute();
+		$result = $statement->fetchAll();
+		$data = array();
+		$filtered_rows = $statement->rowCount();
+		$num = 1;
+		foreach($result as $row)
+		{
+			$sub_array = array();
+			$sub_array[] = $num;
+			$sub_array[] = $row['kode'];
+			$sub_array[] = $row['tanggal'];
+			$sub_array[] = $event->totalRow($row['id'], 'penumpang');
+			$sub_array[] = $event->totalRow($row['id'], 'saksi');
+			$sub_array[] = $event->totalRow($row['id'], 'tersangka');
+			$sub_array[] = $event->totalRow($row['id'], 'korban');
+			$data[] = $sub_array;
+			$num++;
+		}
+		$output = array(
+			"draw"				=>	intval($_POST["draw"]),
+			"recordsTotal"		=> 	$filtered_rows,
+			"recordsFiltered"	=>	$event->total_records('kecelakaan'),
 			"data"				=>	$data
 		);
 		echo json_encode($output);
@@ -775,6 +828,7 @@
 		echo json_encode($output);
 	}
 	
+	// export kejadian
 	if($_POST["operation"] == "export" && $_POST["table"] == "kejadian"){
 		
 		$event = new Event($db);
@@ -836,6 +890,7 @@
 		echo json_encode($response);
 	}
 	
+	// export kerusakan
 	if($_POST["operation"] == "export" && $_POST["table"] == "kerusakan"){
 		
 		$event = new Event($db);
@@ -891,6 +946,76 @@
 		ob_end_clean();
 		$response =  array(
 			'name' => 'Laporan Kerusakan',
+			'op' => $_POST['frm'].' - '.$_POST['to'],
+			'file' => "data:application/vnd.ms-excel;base64,".base64_encode($xlsData)
+		);
+		echo json_encode($response);
+	}
+
+	// export kecelakaan
+	if($_POST["operation"] == "export" && $_POST["table"] == "kecelakaan"){
+		
+		$event = new Event($db);
+		$spreadsheet = new Spreadsheet();
+		$sheet = $spreadsheet->getActiveSheet();
+		$sheet->setCellValue('A2', 'SISTEM INFORMASI PENGADUAN');
+		$sheet->mergeCells('A2:C2');
+		$sheet->setCellValue('A4', 'Periode');
+		$sheet->setCellValue('B4', 'Judul');
+		$sheet->setCellValue('A5', $_POST['frm']." - ".$_POST['to']);
+		$sheet->setCellValue('B5', 'Laporan Kecelakaan');
+		$sheet->mergeCells('B5:C5');
+		
+		//header
+		$sheet->setCellValue('A7', 'Kode');
+		$sheet->setCellValue('B7', 'Tanggal');
+		$sheet->setCellValue('C7', 'Penumpang');
+		$sheet->setCellValue('D7', 'Saksi');
+		$sheet->setCellValue('E7', 'Tersangka');
+		$sheet->setCellValue('F7', 'Korban');
+		$sheet->setCellValue('G7', 'Keterangan');
+		
+		$arr = array(
+			'from' => $_POST['frm'],
+			'to' => $_POST['to']
+		);
+		
+		$data = $event->exportKecelakaan($arr);
+		
+		$no = 1;
+		$num_row = 8;
+		foreach ($data as $row) {
+		  $sheet->setCellValue('A'.$num_row, $row['kode']);
+		  $sheet->setCellValue('B'.$num_row, $row['tanggal']);
+		  $sheet->setCellValue('C'.$num_row, $event->totalRow($row['id'], 'penumpang'));
+		  $sheet->setCellValue('D'.$num_row, $event->totalRow($row['id'], 'saksi'));
+		  $sheet->setCellValue('E'.$num_row, $event->totalRow($row['id'], 'tersangka'));
+		  $sheet->setCellValue('F'.$num_row, $event->totalRow($row['id'], 'korban'));
+		  $sheet->setCellValue('G'.$num_row, $row['keterangan']);
+		  $no++;
+		  $num_row++;
+		}
+		
+		$sheet->getColumnDimension('A')->setWidth(30);
+		$sheet->getColumnDimension('B')->setWidth(30);
+		$sheet->getColumnDimension('C')->setWidth(12);
+		$sheet->getColumnDimension('D')->setWidth(10);
+		$sheet->getColumnDimension('E')->setWidth(10);
+		$sheet->getColumnDimension('F')->setWidth(10);
+		$sheet->getColumnDimension('G')->setWidth(40);
+		
+		header('Content-Type: application/vnd.ms-excel');
+		header('Content-Disposition: attachment;filename="Laporan Kecelakaan.xlsx"'); /*-- $filename is  xsl filename ---*/
+		header('Cache-Control: max-age=0');
+
+		$writer = new Xlsx($spreadsheet);
+
+		ob_start();
+		$writer->save('php://output');
+		$xlsData = ob_get_contents();
+		ob_end_clean();
+		$response =  array(
+			'name' => 'Laporan Kecelakaan',
 			'op' => $_POST['frm'].' - '.$_POST['to'],
 			'file' => "data:application/vnd.ms-excel;base64,".base64_encode($xlsData)
 		);

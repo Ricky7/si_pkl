@@ -298,6 +298,28 @@
 			}
 			return $output;
 		}
+
+		public function exportKecelakaan($data = array())
+		{
+			$output = array();
+			$statement = $this->db->prepare(
+				"SELECT a.id, a.kode, DATE(a.tanggal) as tgl, a.keterangan FROM kecelakaan a 
+					WHERE DATE(a.createAt) 
+					BETWEEN '".$data['from']."' AND '".$data['to']."'"
+			);
+			$statement->execute();
+			$result = $statement->fetchAll();
+			$i = 1; 
+			foreach($result as $row)
+			{
+				$output[$i]['id'] = $row["id"];
+				$output[$i]["kode"] = $row["kode"];
+				$output[$i]["tanggal"] = $row["tgl"];
+				$output[$i]["keterangan"] = $row["keterangan"];
+				$i++;
+			}
+			return $output;
+		}
 		
 		public function exportKeluhan($data = array())
 		{
@@ -482,6 +504,14 @@
 				else 
 					return false;
 			}
+		}
+
+		public function totalRow($id, $table)
+		{
+			$sql = "SELECT * FROM {$table} WHERE kecelakaan_id = {$id}";
+			$stat = $this->db->prepare($sql);
+			$stat->execute();
+			return $stat->rowCount();
 		}
 
 		public function total_records($table)

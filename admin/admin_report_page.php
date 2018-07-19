@@ -15,6 +15,8 @@
 				|
 				<a href="#" class="report_kerusakan" onclick="loadPage('data_report_kerusakan.php', ReportKerusakanFunc)">Report Kerusakan</a>
 				|
+				<a href="#" class="report_kecelakaan" onclick="loadPage('data_report_kecelakaan.php', ReportKecelakaanFunc)">Report Kecelakaan</a>
+				|
 				<a href="#" class="report_lap_kerusakan" onclick="loadPage('data_report_lap_kerusakan.php', ReportLapKerusakanFunc)">Report Laporan Kerusakan</a>
 				|
 				<a href="#" class="report_lap_kejadian" onclick="loadPage('data_report_lap_kejadian.php', ReportLapKejadianFunc)">Report Laporan Kejadian</a>
@@ -45,6 +47,10 @@ var ReportKejadianFunc = function(){
 
 var ReportKerusakanFunc = function(){
 	console.log('ReportKerusakan');
+}
+
+var ReportKecelakaanFunc = function(){
+	console.log('ReportKecelakaan');
 }
 
 var ReportLapKerusakanFunc = function(){
