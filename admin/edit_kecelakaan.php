@@ -58,7 +58,7 @@
 					<h6>Data Pengemudi</h6>
 				</div>
 				<div class="card-body">
-                    <a href="#" data-toggle="modal" onclick="modalCall('input_pengemudi.php')" data-target="#addDataModal">+ Add Data</a>
+                    <a href="#" data-toggle="modal" data-backdrop="static" data-keyboard="false" onclick="modalCall('input_pengemudi.php')" data-target="#addDataModal">+ Add Data</a>
                     <table id="data_pengemudi" class="table table-bordered table-striped">
                         <thead>
                             <th width="3%">#</th>
@@ -88,6 +88,7 @@
 					<h6>Data Penumpang</h6>
 				</div>
 				<div class="card-body">
+                <a href="#" data-toggle="modal" data-backdrop="static" data-keyboard="false" onclick="modalCall('input_penumpang.php')" data-target="#addDataModal">+ Add Data</a>
                     <table id="data_penumpang" class="table table-bordered table-striped">
                         <thead>
                             <th width="3%">#</th>
@@ -115,6 +116,7 @@
 					<h6>Data Saksi</h6>
 				</div>
 				<div class="card-body">
+                <a href="#" data-toggle="modal" data-backdrop="static" data-keyboard="false" onclick="modalCall('input_saksi.php')" data-target="#addDataModal">+ Add Data</a>
                     <table id="data_saksi" class="table table-bordered table-striped">
                         <thead>
                             <th width="3%">#</th>
@@ -142,6 +144,7 @@
 					<h6>Data Tersangka</h6>
 				</div>
 				<div class="card-body">
+                <a href="#" data-toggle="modal" data-backdrop="static" data-keyboard="false" onclick="modalCall('input_tersangka.php')" data-target="#addDataModal">+ Add Data</a>
                     <table id="data_tersangka" class="table table-bordered table-striped">
                         <thead>
                             <th width="3%">#</th>
@@ -169,6 +172,7 @@
 					<h6>Data Korban</h6>
 				</div>
 				<div class="card-body">
+                <a href="#" data-toggle="modal" data-backdrop="static" data-keyboard="false" onclick="modalCall('input_korban.php')" data-target="#addDataModal">+ Add Data</a>
                     <table id="data_korban" class="table table-bordered table-striped">
                         <thead>
                             <th width="3%">#</th>

@@ -363,6 +363,12 @@
 			$add->execute();
 		}
 
+		public function inputToALL($data = array(), $function)
+		{
+			$this->$function($data, $data['kid']);
+			return $this->output('suc','Berhasil diinput');
+		}
+
 		private function setPengemudi($data = array(), $laka_id)
 		{
 			if(!$this->arrayNull($data))

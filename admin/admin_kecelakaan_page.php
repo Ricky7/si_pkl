@@ -153,6 +153,35 @@ $(document).on('submit', '#kecelakaan_form', function(event){
 	});
 });
 
+var addGlobal = function(table, formName){
+	event.preventDefault();
+	var tbl = table;
+	var operation = 'add';
+	var formData = new FormData($('#'+formName)[0]);
+	formData.append('table', table);
+	formData.append('operation', operation);
+	$.ajax({
+		url: base_url+"helper/insert.php",
+		method:'POST',
+		data:formData,
+		contentType:false,
+		processData:false,
+		dataType:"json",
+		success:function(data)
+		{
+			if(data.msg == 'suc'){
+				$.alert(data.print);
+				$('#data_'+tbl).DataTable().ajax.reload();
+				$('#'+formName)[0].reset();
+				$('#addDataModal').modal('hide');
+			}
+			if(data.msg == 'err'){
+				$.alert(data.print);
+			}
+		}
+	});
+}
+
 var tabelKecelakaan = function(){
 	var opr = 'read';
 	var tbl = 'kecelakaan';

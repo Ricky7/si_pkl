@@ -49,14 +49,17 @@
                 </div>
                 <div class="form-group">
                     <label>Alamat Pengemudi</label>
-                    <textarea class="form-control" name="alamat_pengemudi" id="alamat_pengemudi" rows="5"></textarea>
+                    <textarea class="form-control" name="alamat_pengemudi" id="alamat_pengemudi" rows="5" required></textarea>
                 </div>
                 <div class="form-group">
                     <label>Keterangan Tambahan</label>
-                    <textarea class="form-control" name="ket_pengemudi" id="ket_pengemudi" rows="5"></textarea>
+                    <textarea class="form-control" name="ket_pengemudi" id="ket_pengemudi" rows="5" required></textarea>
                 </div>
             </div>
             <div class="card-footer">
+                <center>
+                    <button type="submit" onclick="addGlobal('pengemudi','pengemudi_form')" class="btn btn-sm btn-primary">Submit</button>
+                </center>
             </div>
         </div>
     </div>

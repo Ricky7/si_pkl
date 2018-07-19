@@ -285,5 +285,99 @@
 		$res = $event->insertKecelakaan($data_laka, $data_pengemudi, $data_penumpang, $data_saksi, $data_tersangka, $data_korban);
 		echo json_encode($res);
 	}
+
+	if($_POST["operation"] == "add" && $_POST["table"] == "pengemudi"){
+		$event = new Event($db);
+		$admin = new Admin($db);
+
+		$data = array(
+			'nama' => $_POST['nama_pengemudi'],
+			'alamat' => $_POST['alamat_pengemudi'],
+			'umur' => $_POST['umur_pengemudi'],
+			'no_ktp' => $_POST['ktp_pengemudi'],
+			'no_sim' => $_POST['sim_pengemudi'],
+			'jenis_sim' => $_POST['jensim_pengemudi'],
+			'jenis_kelamin' => $_POST['gender_pengemudi'],
+			'info_extra' => $_POST['ket_pengemudi'],
+			'kid' => $_POST['k_id']
+		);
+
+		$res = $event->inputToALL($data,'setPengemudi');
+		echo json_encode($res);
+	}
+
+	if($_POST["operation"] == "add" && $_POST["table"] == "penumpang"){
+		$event = new Event($db);
+		$admin = new Admin($db);
+
+		$data = array(
+			'nama' => $_POST['nama_penumpang'],
+			'alamat' => $_POST['alamat_penumpang'],
+			'umur' => $_POST['umur_penumpang'],
+			'no_ktp' => $_POST['ktp_penumpang'],
+			'info_cedera' => $_POST['info_cedera_penumpang'],
+			'jenis_kelamin' => $_POST['gender_penumpang'],
+			'info_extra' => $_POST['ket_penumpang'],
+			'kid' => $_POST['k_id']
+		);
+
+		$res = $event->inputToALL($data,'setPenumpang');
+		echo json_encode($res);
+	}
+
+	if($_POST["operation"] == "add" && $_POST["table"] == "saksi"){
+		$event = new Event($db);
+		$admin = new Admin($db);
+
+		$data = array(
+			'nama' => $_POST['nama_saksi'],
+			'no_ktp' => $_POST['ktp_saksi'],
+			'umur' => $_POST['umur_saksi'],
+			'alamat' => $_POST['alamat_saksi'],
+			'jenis_kelamin' => $_POST['gender_saksi'],
+			'pernyataan' => $_POST['pernyataan_saksi'],
+			'kid' => $_POST['k_id']
+		);
+
+		$res = $event->inputToALL($data,'setSaksi');
+		echo json_encode($res);
+	}
+
+	if($_POST["operation"] == "add" && $_POST["table"] == "tersangka"){
+		$event = new Event($db);
+		$admin = new Admin($db);
+
+		$data = array(
+			'nama' => $_POST['nama_tersangka'],
+			'no_ktp' => $_POST['ktp_tersangka'],
+			'umur' => $_POST['umur_tersangka'],
+			'alamat' => $_POST['alamat_tersangka'],
+			'jenis_kelamin' => $_POST['gender_tersangka'],
+			'pernyataan' => $_POST['pernyataan_tersangka'],
+			'kid' => $_POST['k_id']
+		);
+
+		$res = $event->inputToALL($data,'setTersangka');
+		echo json_encode($res);
+	}
+
+	if($_POST["operation"] == "add" && $_POST["table"] == "korban"){
+		$event = new Event($db);
+		$admin = new Admin($db);
+
+		$data = array(
+			'nama' => $_POST['nama_korban'],
+			'no_ktp' => $_POST['ktp_korban'],
+			'umur' => $_POST['umur_korban'],
+			'alamat' => $_POST['alamat_korban'],
+			'jenis_kelamin' => $_POST['gender_korban'],
+			'pernyataan' => $_POST['pernyataan_korban'],
+			'status' => $_POST['status_korban'],
+			'kid' => $_POST['k_id']
+		);
+
+		$res = $event->inputToALL($data,'setKorban');
+		echo json_encode($res);
+	}
   }
 ?>
