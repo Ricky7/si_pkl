@@ -514,6 +514,25 @@
 			return $stat->rowCount();
 		}
 
+		public function showKejadian($jenis)
+		{
+			$output = array();
+			$statement = $this->db->prepare(
+			"SELECT * FROM kejadian WHERE id_kasus = {$jenis}"
+			);
+			$statement->execute();
+			$result = $statement->fetchAll();
+			$i = 0;
+			foreach($result as $row)
+			{
+				$output[$i]['id'] = $row["id"];
+				$output[$i]["judul"] = $row["judul"];
+				$output[$i]["gambar"] = $row["gambar"];
+				$i++;
+			}
+			echo json_encode($output);
+		}
+
 		public function total_records($table)
 		{
 			$statement = $this->db->prepare("SELECT * FROM {$table}");

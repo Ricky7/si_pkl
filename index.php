@@ -41,18 +41,8 @@
 					</ul>
 
 					<!-- The slideshow -->
-					<div class="carousel-inner">
-						<div class="carousel-item active">
-							<img src="images/noimage.png" style="width:720px;height:400px;">
-							<strong>Images 1</strong>
-						</div>
-						<div class="carousel-item">
-							<img src="images/noimage.png" style="width:720px;height:400px;">
-							<strong>Images 2</strong>
-						</div>
-						<div class="carousel-item">
-							<img src="images/noimage.png" style="width:720px;height:400px;">
-						</div>
+					<div class="carousel-inner" id="carousel1">
+						
 					</div>
 
 					<!-- Left and right controls -->
@@ -65,19 +55,19 @@
 
 				</div>
 			</div>
-			<div class="col-md-4 rightnews">
-				<div class="card" style="margin-bottom:15px;height:100px;">
+			<div class="col-md-4 rightnews" id="carousel2">
+				<!-- <div class="card" style="margin-bottom:15px;height:100px;">
 					<div class="card-body">
 						<div class="row">
 							<div class="col-md-3">
-								<img src="images/noimage.png" style="width:60px;height:60px;">
+								<img src="images/noimage.png" style="width:50px;height:50px;">
 							</div>
 							<div class="col-md-9">
 								<h6>Lorem ipsum dolor sit amet, consectetur </h6>
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	  
@@ -269,4 +259,89 @@ $(document).on('submit', '#login_form', function(event){
     }
   });
 });
+
+$(window).on('load', function() {
+	callCarousel();
+	callRightNews();
+});
+
+var callCarousel = function()
+{
+	var table = 'kejadian';
+  var operation = 'show';
+  var formData = new FormData();
+  formData.append('table', table);
+  formData.append('operation', operation);
+	$.ajax({
+    url:"helper/read.php",
+    method:'POST',
+    data:formData,
+    contentType:false,
+    processData:false,
+    dataType:"json",
+    success:function(data)
+    {
+			var list = '';
+			var act = 'active';
+			for(var i = 0; i < data.length; i++){
+				if(i != 0){
+					var act = '';
+				}
+				list += carousel(data[i].judul, data[i].gambar, act);
+			}
+			$('#carousel1').append(list);
+    }
+  });
+}
+
+var callRightNews = function()
+{
+	var table = 'kerusakan';
+  var operation = 'show';
+  var formData = new FormData();
+  formData.append('table', table);
+  formData.append('operation', operation);
+	$.ajax({
+    url:"helper/read.php",
+    method:'POST',
+    data:formData,
+    contentType:false,
+    processData:false,
+    dataType:"json",
+    success:function(data)
+    {
+			var list = '';
+			for(var i = 0; i < data.length; i++){
+				if(i != 0){
+					var act = '';
+				}
+				list += rightNews(data[i].judul, data[i].gambar);
+			}
+			$('#carousel2').append(list);
+    }
+  });
+}
+
+var carousel = function(judul, gambar, active) {
+	return '<div class="carousel-item '+active+'">'+
+							'<img src="gambar/'+gambar+'" style="width:720px;height:400px;">'+
+							'<center style="padding-top:20px;"><strong>'+judul+'</strong></center>'+
+					'</div>';
+}
+
+var rightNews = function(judul, gambar) {
+	var res = judul.substring(0, 40)+'...';
+	return '<div class="card" style="margin-bottom:15px;height:100px;">'+
+					'<div class="card-body">'+
+						'<div class="row">'+
+							'<div class="col-md-3">'+
+								'<img src="gambar/'+gambar+'" style="width:50px;height:50px;">'+
+							'</div>'+
+							'<div class="col-md-9">'+
+								'<h6>'+res+'</h6>'+
+							'</div>'+
+						'</div>'+
+					'</div>'+
+				'</div>';
+}
 </script>

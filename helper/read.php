@@ -1196,5 +1196,17 @@
 		);
 		echo json_encode($output);
 	}
+
+	//show carousel kejadian
+	if($_POST["operation"] == "show" && $_POST["table"] == "kejadian"){
+		$event = new Event($db);
+		$event->showKejadian(1);
+	}
+
+	//show news kejadian
+	if($_POST["operation"] == "show" && $_POST["table"] == "kerusakan"){
+		$event = new Event($db);
+		$event->showKejadian(2);
+	}
   }
 ?>
