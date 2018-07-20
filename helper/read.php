@@ -1183,7 +1183,6 @@
 			$sub_array[] = $row['nama'];
 			$sub_array[] = '
 				<button type="button" name="edit" id="'.$row["id_k"].'" class="btn btn-primary btn-sm edit">View</button>
-				<button type="button" name="delete" id="'.$row["id_k"].'" class="btn btn-danger btn-sm delete">Delete</button>
 				';
 			$data[] = $sub_array;
 			$num++;
@@ -1207,6 +1206,12 @@
 	if($_POST["operation"] == "show" && $_POST["table"] == "kerusakan"){
 		$event = new Event($db);
 		$event->showKejadian(2);
+	}
+
+	//show news kejadian
+	if($_POST["operation"] == "show" && $_POST["table"] == "berita"){
+		$event = new Event($db);
+		$event->showBerita();
 	}
   }
 ?>

@@ -74,7 +74,7 @@ input::-webkit-input-placeholder {
   .rightnews {
 	  display:block;
 	  width:100%;
-	  height:600px;
+	  height:450px;
 	  /* background-color:#475; */
 	  overflow-y:scroll;
   }
@@ -82,7 +82,14 @@ input::-webkit-input-placeholder {
   .leftnews {
 	  display:block;
 	  width:100%;
-	  height:600px;
+	  height:450px;
+  }
+
+  .bottomnews {
+    display:block;
+    width: 100%;
+    height: 350px;
+    overflow-x: scroll;
   }
   
   .cardHeadLaka {

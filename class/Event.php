@@ -518,7 +518,26 @@
 		{
 			$output = array();
 			$statement = $this->db->prepare(
-			"SELECT * FROM kejadian WHERE id_kasus = {$jenis}"
+			"SELECT * FROM kejadian WHERE id_kasus = {$jenis} order by id desc"
+			);
+			$statement->execute();
+			$result = $statement->fetchAll();
+			$i = 0;
+			foreach($result as $row)
+			{
+				$output[$i]['id'] = $row["id"];
+				$output[$i]["judul"] = $row["judul"];
+				$output[$i]["gambar"] = $row["gambar"];
+				$i++;
+			}
+			echo json_encode($output);
+		}
+
+		public function showBerita()
+		{
+			$output = array();
+			$statement = $this->db->prepare(
+			"SELECT * FROM berita order by id desc"
 			);
 			$statement->execute();
 			$result = $statement->fetchAll();
