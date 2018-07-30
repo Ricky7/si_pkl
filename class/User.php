@@ -41,7 +41,7 @@
               return $this->output('err','Anda Belum Terdaftar');
           }
       } catch (PDOException $e) {
-          return $this->output('err',getMessage());
+          return $this->output('err', $e->getMessage());
       }
     }
 

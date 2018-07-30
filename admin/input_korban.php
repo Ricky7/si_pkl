@@ -37,7 +37,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Alamat Saksi</label>
+                    <label>Alamat Korban</label>
                     <textarea class="form-control" name="alamat_korban" id="alamat_korban" rows="5"></textarea>
                 </div>
                 <div class="form-group">

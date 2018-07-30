@@ -29,7 +29,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label>Alamat Saksi</label>
+                    <label>Alamat Tersangka</label>
                     <textarea class="form-control" name="alamat_tersangka" id="alamat_tersangka" rows="5"></textarea>
                 </div>
                 <div class="form-group">
