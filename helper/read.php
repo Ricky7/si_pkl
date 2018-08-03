@@ -687,7 +687,7 @@
 		$event = new Event($db);
 		$query = '';
 		$output = array();
-		$query .= 'SELECT a.id, a.kode, a.tanggal 
+		$query .= 'SELECT a.id, a.kode, DATE(a.tanggal) as tgl 
 					FROM kecelakaan a WHERE DATE(a.createAt) BETWEEN "'.$_POST['frm'].'" AND "'.$_POST['to'].'" ';
 		if(isset($_POST["search"]["value"]))
 		{
@@ -716,7 +716,7 @@
 			$sub_array = array();
 			$sub_array[] = $num;
 			$sub_array[] = $row['kode'];
-			$sub_array[] = $row['tanggal'];
+			$sub_array[] = $row['tgl'];
 			$sub_array[] = $event->totalRow($row['id'], 'penumpang');
 			$sub_array[] = $event->totalRow($row['id'], 'saksi');
 			$sub_array[] = $event->totalRow($row['id'], 'tersangka');
