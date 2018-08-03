@@ -237,6 +237,7 @@
 				$output["lokasi"] = $row["lokasi"];
 				$output["pelapor"] = $row["nama"];
 				$output["isi"] = $row["isi"];
+				$output["gambar"] = $row["gambar"];
 			}
 			echo json_encode($output);
 		}

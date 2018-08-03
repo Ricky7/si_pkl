@@ -115,6 +115,7 @@ $(document).on('click', '.view', function(){
 						openModalLoader();
 						setTimeout(function()
 						{ 
+							$("#gambar").attr("src", base_url+"gambar/"+data.gambar);
 							$('#judul').val(data.judul);
 							$('#kasus').val(data.kasus);
 							$('#lokasi').val(data.lokasi);

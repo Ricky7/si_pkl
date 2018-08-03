@@ -1,3 +1,6 @@
+<div class="form-froup">
+	<center><img class="img-responsive" id="gambar" width="300px" height="200px"></center>
+</div>
 <div class="form-group">
 	<label for="judul">Judul</label>
 	<input type="text" class="form-control" id="judul" name="judul" placeholder="Enter Judul" readonly>

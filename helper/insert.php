@@ -15,7 +15,8 @@
 		$data = array(
 			'nama' => $_POST['reg_nama'],
 			'username' => $_POST['reg_username'],
-			'password' => $_POST['reg_password']
+			'password' => $_POST['reg_password'],
+			'hp' => $_POST['reg_hp']
 		);
 		$res = $user->register($data);
 		echo json_encode($res);

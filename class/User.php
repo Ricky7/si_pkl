@@ -53,10 +53,11 @@
           $hashPasswd = password_hash($data['password'], PASSWORD_DEFAULT);
 
           //Masukkan user baru ke database
-          $query = $this->db->prepare("INSERT INTO users(nama, username, password, tgl_create) VALUES(:nama, :username, :pass, NOW())");
+          $query = $this->db->prepare("INSERT INTO users(nama, username, password, no_telp, tgl_create) VALUES(:nama, :username, :pass, :hp, NOW())");
           $query->bindParam(":nama", $data['nama']);
           $query->bindParam(":username", $data['username']);
           $query->bindParam(":pass", $hashPasswd);
+          $query->bindParam(":hp", $data['hp']);
           $query->execute();
 
           return $this->output('suc','Registrasi Berhasil');

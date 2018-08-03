@@ -119,6 +119,16 @@
   								</div>
   							</div>
   						</div>
+
+							<div class="form-group">
+  							<label for="username" class="cols-sm-2 control-label">No Handphone</label>
+  							<div class="cols-sm-10">
+  								<div class="input-group">
+  									<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+  									<input type="text" class="form-control" name="reg_hp" id="reg_hp"  placeholder="Masukkan No Handphone Anda" required/>
+  								</div>
+  							</div>
+  						</div>
   				</div>
         </div>
         <div class="modal-footer">
@@ -166,7 +176,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Save changes</button>
+          <button type="submit" class="btn btn-primary">Login</button>
         </div>
 		</form>
       </div>
