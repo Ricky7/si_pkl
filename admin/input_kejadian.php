@@ -8,6 +8,9 @@
 		<input type="file" class="form-control" id="gambar" name="gambar" required>
 	</div>
 	<div class="form-group">
+		<div id="img"></div>
+	</div>
+	<div class="form-group">
 		<label for="lokasi">Alamat Lokasi</label>
 		<input type="text" class="form-control inputAddress" id="lokasi" name="lokasi" required>
 		<input type="hidden" class="latitude" name="lat">

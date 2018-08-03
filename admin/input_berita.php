@@ -8,6 +8,9 @@
 		<input type="file" class="form-control" id="gambar" name="gambar" required>
 	</div>
 	<div class="form-group">
+		<div id="img"></div>
+	</div>
+	<div class="form-group">
 		<div id="map" height="460px" width="100%"></div>
 	</div>
 	<div class="form-group">
