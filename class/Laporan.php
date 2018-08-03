@@ -36,6 +36,62 @@
 				  return $this->output('err',$e->getMessage());
 			  }
 		}
+
+		public function getDataLaporan()
+		{
+			$output = array();
+			$statement = $this->db->prepare(
+				"SELECT DATE_FORMAT(tgl_lapor,'%d %M %Y') AS dates, 
+					COUNT(id) as jlh
+				FROM laporan GROUP BY dates LIMIT 7"
+			);
+			$statement->execute();
+			$output = $statement->fetchAll();
+			
+		  echo json_encode($output);
+		}
+
+		public function getDataKejadian()
+		{
+			$output = array();
+			$statement = $this->db->prepare(
+				"SELECT DATE_FORMAT(tgl_buat,'%d %M %Y') AS dates, 
+					COUNT(id) as jlh
+				FROM kejadian WHERE id_kasus = 1 GROUP BY dates LIMIT 7"
+			);
+			$statement->execute();
+			$output = $statement->fetchAll();
+			
+		  echo json_encode($output);
+		}
+
+		public function getDataKerusakan()
+		{
+			$output = array();
+			$statement = $this->db->prepare(
+				"SELECT DATE_FORMAT(tgl_buat,'%d %M %Y') AS dates, 
+					COUNT(id) as jlh
+				FROM kejadian WHERE id_kasus = 2 GROUP BY dates LIMIT 7"
+			);
+			$statement->execute();
+			$output = $statement->fetchAll();
+			
+		  echo json_encode($output);
+		}
+
+		public function getDataKecelakaan()
+		{
+			$output = array();
+			$statement = $this->db->prepare(
+				"SELECT DATE_FORMAT(tanggal,'%d %M %Y') AS dates, 
+					COUNT(id) as jlh
+				FROM kecelakaan GROUP BY dates LIMIT 7"
+			);
+			$statement->execute();
+			$output = $statement->fetchAll();
+			
+		  echo json_encode($output);
+		}
 		
 		private function output($msg,$print)
 		{

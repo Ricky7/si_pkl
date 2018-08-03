@@ -22,6 +22,7 @@
 <script src="<?php echo getBaseUrl().'DataTables-1.10.18/js/jquery.dataTables.min.js' ?>"></script>
 <script src="<?php echo getBaseUrl().'DataTables-1.10.18/js/dataTables.bootstrap4.min.js' ?>"></script>
 <script src="<?php echo getBaseUrl().'js/flatpickr.js' ?>"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <!-- <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script> -->
 <script>
 

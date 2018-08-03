@@ -3,6 +3,7 @@
 	require_once "../class/User.php";
 	require_once "../class/Admin.php";
 	require_once "../class/Event.php";
+	require_once "../class/Laporan.php";
 	require_once "../vendor/autoload.php";
   
 	use PhpOffice\PhpSpreadsheet\Spreadsheet;
@@ -1212,6 +1213,26 @@
 	if($_POST["operation"] == "show" && $_POST["table"] == "berita"){
 		$event = new Event($db);
 		$event->showBerita();
+	}
+
+	if($_POST["operation"] == "graph" && $_POST["table"] == "laporan"){
+		$lap = new Laporan($db);
+		$lap->getDataLaporan();
+	}
+
+	if($_POST["operation"] == "graph" && $_POST["table"] == "kejadian"){
+		$lap = new Laporan($db);
+		$lap->getDataKejadian();
+	}
+
+	if($_POST["operation"] == "graph" && $_POST["table"] == "kerusakan"){
+		$lap = new Laporan($db);
+		$lap->getDataKerusakan();
+	}
+
+	if($_POST["operation"] == "graph" && $_POST["table"] == "kecelakaan"){
+		$lap = new Laporan($db);
+		$lap->getDataKecelakaan();
 	}
   }
 ?>
