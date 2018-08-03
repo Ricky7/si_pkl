@@ -31,6 +31,7 @@
 					  $_SESSION['admin_session'] = $res['id'];
 					  $_SESSION['admin_nama'] = $res['nama'];
 					  $_SESSION['isAdminLog'] = TRUE;
+					  $_SESSION['adminRole'] = $res['role'];
 					  return $this->output('suc','Berhasil Login');
 				  }else{
 					  return $this->output('err','Username atau Password Salah');

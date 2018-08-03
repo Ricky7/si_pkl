@@ -84,14 +84,22 @@
 						</div>
 					</div>
 					<div class="form-group row">
-						<div class="col-6">
+						<div class="col-4">
 							<label>No SIM</label>
 							<input type="number" class="form-control" id="sim_pengemudi" name="sim_pengemudi" required>
 						</div>
-						<div class="col-6">
+						<div class="col-4">
 							<label>No KTP</label>
 							<input type="number" class="form-control" id="ktp_pengemudi" name="ktp_pengemudi" required>
 						</div>
+						<div class="col-4">
+							<label>No Plat</label>
+							<input type="text" class="form-control" id="plat_pengemudi" name="plat_pengemudi" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label>Info Kendaraan</label>
+						<textarea class="form-control" name="info_ken_pengemudi" id="info_ken_pengemudi" rows="5"></textarea>
 					</div>
 					<div class="form-group">
 						<label>Alamat Pengemudi</label>

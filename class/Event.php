@@ -397,8 +397,8 @@
 			if(!$this->arrayNull($data))
 			{
 				$add = $this->db->prepare("
-					INSERT INTO pengemudi(nama, alamat, umur, no_ktp, no_sim, jenis_sim, jenis_kelamin, info_tambahan, kecelakaan_id)
-					VALUES (:nama, :alamat, :umur, :no_ktp, :no_sim, :jenis_sim, :jenis_kelamin, :info_extra, :laka_id);	
+					INSERT INTO pengemudi(nama, alamat, umur, no_ktp, no_sim, jenis_sim, jenis_kelamin, no_plat, info_kendaraan, info_tambahan, kecelakaan_id)
+					VALUES (:nama, :alamat, :umur, :no_ktp, :no_sim, :jenis_sim, :jenis_kelamin, :no_plat, :info_kendaraan, :info_extra, :laka_id);	
 				");
 
 				$add->bindParam(":nama", $data['nama']);
@@ -408,6 +408,8 @@
 				$add->bindParam(":no_sim", $data['no_sim']);
 				$add->bindParam(":jenis_sim", $data['jenis_sim']);
 				$add->bindParam(":jenis_kelamin", $data['jenis_kelamin']);
+				$add->bindParam(":no_plat", $data['no_plat']);
+				$add->bindParam(":info_kendaraan", $data['info_kendaraan']);
 				$add->bindParam(":info_extra", $data['info_extra']);
 				$add->bindParam(":laka_id", $laka_id);
 				$add->execute();

@@ -240,6 +240,8 @@
 			'umur' => $_POST['umur_pengemudi'],
 			'no_ktp' => $_POST['ktp_pengemudi'],
 			'no_sim' => $_POST['sim_pengemudi'],
+			'no_plat' => $_POST['plat_pengemudi'],
+			'info_kendaraan' => $_POST['info_ken_pengemudi'],
 			'jenis_sim' => $_POST['jensim_pengemudi'],
 			'jenis_kelamin' => $_POST['gender_pengemudi'],
 			'info_extra' => $_POST['ket_pengemudi']
@@ -299,6 +301,8 @@
 			'no_sim' => $_POST['sim_pengemudi'],
 			'jenis_sim' => $_POST['jensim_pengemudi'],
 			'jenis_kelamin' => $_POST['gender_pengemudi'],
+			'no_plat' => $_POST['plat_pengemudi'],
+			'info_kendaraan' => $_POST['info_ken_pengemudi'],
 			'info_extra' => $_POST['ket_pengemudi'],
 			'kid' => $_POST['k_id']
 		);

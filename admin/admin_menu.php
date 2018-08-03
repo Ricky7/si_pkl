@@ -17,10 +17,10 @@
             <span class="sr-only">(current)</span>
           </a>
         </li>
+		<?php if($_SESSION['adminRole'] == 'admin'){ ?>
 		<li class="nav-item">
 			<a class="nav-link" href="admin_laporan_page.php">Laporan warga</a>
 		</li>
-		<?php if($admin->isLog()){ ?>
 		<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			  Kasus
@@ -36,14 +36,14 @@
 		<li class="nav-item">
 			<a class="nav-link" href="admin_berita_page.php">Berita</a>
 		</li>
+		<?php } else { ?>
 		<li class="nav-item">
 			<a class="nav-link" href="admin_report_page.php">Report</a>
 		</li>
+		<?php } ?>
 		<li class="nav-item">
 			<a class="nav-link" href="admin_logout.php">Logout</a>
 		</li>
-        <?php } else { ?>
-        <?php } ?>
       </ul>
     </div>
   </div>
