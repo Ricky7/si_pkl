@@ -13,3 +13,10 @@
 
 </body>
 </html>
+<script>
+var uri = "<?php echo $_SERVER['REQUEST_URI'] ?>";
+if(uri != '/index.php'){
+  $('.regNav').hide();
+  $('.logNav').hide();
+}
+</script>

@@ -10,6 +10,7 @@
 	<link rel="shortcut icon" href="images/Lambang_Polri_logo.png">
 
     <title>Pengaduan Kecelakaan</title>
+    
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
