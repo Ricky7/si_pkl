@@ -4,6 +4,52 @@
   require_once "../class/Laporan.php";
   require_once "../class/Event.php";
   require_once "../class/Admin.php";
+
+  function prosesVideo($video)
+	{
+		$vidFile = $video['name'];
+		$tmp_dir = $video['tmp_name'];
+		$vidSize = $video['size'];
+
+
+		if(empty($vidFile)) {
+			$msg = "File tidak ada";
+			$vid = "-";
+		} else {
+			$upload_dir = '../video/'; // upload directory
+	 
+			$vidExt = strtolower(pathinfo($vidFile,PATHINFO_EXTENSION)); // get image extension
+		  
+			// valid image extensions
+			$valid_extensions = array('mp4'); // valid extensions
+		  
+			// rename uploading image
+			$userVid = rand(1000,1000000).".".$vidExt;
+
+			// allow valid image file formats
+			if(in_array($vidExt, $valid_extensions)){   
+				// Check file size '5MB'
+				if($vidSize < 50000000)    {
+				  move_uploaded_file($tmp_dir,$upload_dir.$userVid);
+				  $msg = 'suc';
+				  $vid = $userVid;
+				} else {
+				  $msg = "Terlalu Besar";
+				  $vid = "-";
+				}
+			} else {
+				$msg = "Format tidak mp4";  
+				$vid = "-";
+			}
+		}
+
+		$arr = array(
+			'msg' => $msg,
+			'video' => $vid
+		);
+
+		return $arr;
+	}
   
   if(isset($_POST["operation"]) && isset($_POST["table"])){
 	
@@ -118,9 +164,12 @@
 			}
 		}
 		
+		$vid = prosesVideo($_FILES['video']);
+
 		$data = array(
 			'judul' => $_POST['judul'],
 			'gambar' => $userpic,
+			'video' => $vid['video'],
 			'lat' => $_POST['lat'],
 			'long' => $_POST['long'],
 			'addr' => $_POST['addr'],
@@ -172,9 +221,12 @@
 			}
 		}
 		
+		$vid = prosesVideo($_FILES['video']);
+
 		$data = array(
 			'judul' => $_POST['judul'],
 			'gambar' => $userpic,
+			'video' => $vid['video'],
 			'isi' => $_POST['isi_berita'],
 			'admin' => $_SESSION['admin_session']
 		);
@@ -384,5 +436,7 @@
 		$res = $event->inputToALL($data,'setKorban');
 		echo json_encode($res);
 	}
+
+
   }
 ?>

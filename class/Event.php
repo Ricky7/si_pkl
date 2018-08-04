@@ -16,12 +16,13 @@
 			  {
 				$this->db->beginTransaction();	
 				$addKejadian = $this->db->prepare("
-					INSERT INTO kejadian(judul, isi, gambar, alamat, lat, lng, tgl_buat, id_admin, id_kasus)
-					VALUES (:judul, :isi, :gambar, :alamat, :lat, :lng, NOW(), :id_admin, :id_kasus);
+					INSERT INTO kejadian(judul, isi, gambar, video, alamat, lat, lng, tgl_buat, id_admin, id_kasus)
+					VALUES (:judul, :isi, :gambar, :video, :alamat, :lat, :lng, NOW(), :id_admin, :id_kasus);
 				");
 				$addKejadian->bindParam(":judul", $data['judul']);
 				$addKejadian->bindParam(":isi", $data['isi']);
 				$addKejadian->bindParam(":gambar", $data['gambar']);
+				$addKejadian->bindParam(":video", $data['video']);
 				$addKejadian->bindParam(":alamat", $data['addr']);
 				$addKejadian->bindParam(":lat", $data['lat']);
 				$addKejadian->bindParam(":lng", $data['long']);
@@ -148,12 +149,13 @@
 			  {
 				$this->db->beginTransaction();	
 				$addKejadian = $this->db->prepare("
-					INSERT INTO berita(judul, isi, gambar, tgl_buat, id_admin)
-					VALUES (:judul, :isi, :gambar, NOW(), :id_admin);
+					INSERT INTO berita(judul, isi, gambar, video, tgl_buat, id_admin)
+					VALUES (:judul, :isi, :gambar, :video, NOW(), :id_admin);
 				");
 				$addKejadian->bindParam(":judul", $data['judul']);
 				$addKejadian->bindParam(":isi", $data['isi']);
 				$addKejadian->bindParam(":gambar", $data['gambar']);
+				$addKejadian->bindParam(":video", $data['video']);
 				$addKejadian->bindParam(":id_admin", $data['admin']);;
 				$addKejadian->execute();
 				

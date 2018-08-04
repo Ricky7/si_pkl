@@ -11,6 +11,10 @@
 		<div id="img"></div>
 	</div>
 	<div class="form-group">
+		<label for="video">Video</label>
+		<input type="file" class="form-control" id="video" name="video" required>
+	</div>
+	<div class="form-group">
 		<div id="map" height="460px" width="100%"></div>
 	</div>
 	<div class="form-group">

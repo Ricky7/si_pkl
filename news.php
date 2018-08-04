@@ -25,6 +25,7 @@
         $stmt = $db->prepare($query);
         $stmt->execute();
         $row=$stmt->fetch(PDO::FETCH_ASSOC);
+        
   ?>
   <div class="row">
       <div class="col-md-12">
@@ -37,8 +38,16 @@
               <div class="card-body">
                 <div id="img">
                     <center>
-                        <img src="gambar/<?php echo $row['gambar'] ?>" width="30%" height="30%">
+                        <img src="gambar/<?php echo $row['gambar'] ?>" width="50%" height="50%">
                     </center>
+                </div>
+                <div id="vid" style="padding-top:30px">
+                  <center>
+                    <video id="myVideo" width="480" height="360" onclick="this.paused ? this.play() : this.pause();">
+                      <source src="video/<?php echo $row['video'] ?>" type="video/mp4">
+                      Your browser does not support HTML5 video.
+                    </video>
+                  </center>
                 </div>
                 <p id="isi"><?php echo $row['isi'] ?></p>
               </div>
@@ -50,3 +59,4 @@
   </div>
 
 <?php include "view/templates/footer.php"; ?>
+

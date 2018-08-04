@@ -340,7 +340,7 @@ var callBottomNews = function()
 var carousel = function(id, judul, gambar, active) {
 	return '<div class="carousel-item '+active+'">'+
 							'<img src="gambar/'+gambar+'" style="width:720px;height:400px;">'+
-							'<center style="padding-top:20px;"><strong><a href="news.php?s='+id+'&j=berita">'+judul+'</a></strong></center>'+
+							'<center style="padding-top:20px;"><strong><a href="news.php?s='+id+'&j=kejadian">'+judul+'</a></strong></center>'+
 					'</div>';
 }
 
