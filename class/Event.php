@@ -240,6 +240,7 @@
 				$output["pelapor"] = $row["nama"];
 				$output["isi"] = $row["isi"];
 				$output["gambar"] = $row["gambar"];
+				$output["video"] = $row["video"];
 			}
 			echo json_encode($output);
 		}

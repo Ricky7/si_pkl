@@ -6,7 +6,10 @@
 
   if($user->isLog()){
     $dataUser = $user->getUser();
-  }
+	}
+	if(empty($_SESSION['user_session'])){
+			header("location: index.php");
+	}
 
 ?>
 <?php include "view/templates/header.php"; ?>
@@ -36,6 +39,13 @@
 				<input type="file" class="form-control" id="gambar" name="gambar" required>
 			</div>
 			<div class="form-group">
+				<div id="img"></div>
+			</div>
+			<div class="form-group">
+				<label for="video">Video</label>
+				<input type="file" class="form-control" id="video" name="video" required>
+			</div>
+			<div class="form-group">
 				<label for="lokasi">Alamat Lokasi</label>
 				<input type="text" class="form-control" id="lokasi" name="lokasi" required>
 			</div>
@@ -54,6 +64,15 @@
 <?php include "view/templates/footer.php"; ?>
 
 <script type="text/javascript">
+
+$(document).on('change', '#gambar', function(e){
+	$('.img-append').remove();
+	var fileName = e.target.files[0].name;
+	var tmppath = URL.createObjectURL(e.target.files[0]);
+	var img = '<img class="img-responsive img-append" src="'+tmppath+'" width="300px" height="200px">';
+	$('#img').append(img);
+});
+
 // post
 $(document).on('submit', '#laporan_form', function(event){
   event.preventDefault();
@@ -73,6 +92,7 @@ $(document).on('submit', '#laporan_form', function(event){
     {
 		if(data.msg == 'suc'){
 			$.alert(data.print);
+			$('.img-append').remove();
 			$('#laporan_form')[0].reset();
 		}
 		if(data.msg == 'err'){

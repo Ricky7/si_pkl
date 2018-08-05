@@ -116,6 +116,7 @@ $(document).on('click', '.view', function(){
 						setTimeout(function()
 						{ 
 							$("#gambar").attr("src", base_url+"gambar/"+data.gambar);
+							$("#myVideo").append('<source src="'+base_url+'video/'+data.video+'" type="video/mp4">');
 							$('#judul').val(data.judul);
 							$('#kasus').val(data.kasus);
 							$('#lokasi').val(data.lokasi);

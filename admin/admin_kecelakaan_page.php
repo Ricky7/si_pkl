@@ -46,6 +46,7 @@
 <script type="text/javascript">
 
 $(document).on('change', 'input[type="file"]', function(e){
+	$('.img-append').remove();
 	var fileName = e.target.files[0].name;
 	var tmppath = URL.createObjectURL(e.target.files[0]);
 	var img = '<img class="img-responsive" src="'+tmppath+'" width="300px" height="200px">';

@@ -15,7 +15,8 @@
 </html>
 <script>
 var uri = "<?php echo $_SERVER['REQUEST_URI'] ?>";
-if(uri != '/index.php'){
+var _uri = uri.substring(0, 9);
+if(_uri == '/news.php'){
   $('.regNav').hide();
   $('.logNav').hide();
 }

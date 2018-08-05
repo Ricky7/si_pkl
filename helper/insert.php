@@ -112,10 +112,13 @@
 			case 2: $jenis_laporan = 'kerusakan'; break;
 		}
 		
+		$vid = prosesVideo($_FILES['video']);
+
 		$data = array(
 			'judul' => $_POST['judul'],
 			'jenis' => $jenis_laporan,
 			'gambar' => $userpic,
+			'video' => $vid['video'],
 			'lokasi' => $_POST['lokasi'],
 			'isi' => $_POST['isi'],
 			'user_id' => $_SESSION['user_session']

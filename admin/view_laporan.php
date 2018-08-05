@@ -1,5 +1,13 @@
-<div class="form-froup">
+<div class="form-group">
 	<center><img class="img-responsive" id="gambar" width="300px" height="200px"></center>
+</div>
+<div class="form-group">
+	<center>
+		<video id="myVideo" width="480" height="360" onclick="this.paused ? this.play() : this.pause();">
+			<!-- <source id="_video" type="video/mp4"> -->
+			Your browser does not support HTML5 video.
+		</video>
+	</center>
 </div>
 <div class="form-group">
 	<label for="judul">Judul</label>

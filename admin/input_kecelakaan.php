@@ -76,6 +76,7 @@
 							<label>Jenis SIM</label>
 							<select class="form-control" id="jensim_pengemudi" name="jensim_pengemudi" required>
 								<option></option>
+								<option value="-">Tidak Punya</option>
 								<option value="A">SIM A</option>
 								<option value="B1">SIM B1</option>
 								<option value="B2">SIM B2</option>
@@ -89,7 +90,7 @@
 					<div class="form-group row">
 						<div class="col-4">
 							<label>No SIM</label>
-							<input type="number" class="form-control" id="sim_pengemudi" name="sim_pengemudi" required>
+							<input type="number" class="form-control" id="sim_pengemudi" name="sim_pengemudi">
 						</div>
 						<div class="col-4">
 							<label>No KTP</label>
