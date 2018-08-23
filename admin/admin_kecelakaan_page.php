@@ -4,6 +4,11 @@
 	require_once "../helper/url.php";
 	
 	$admin = new Admin($db);
+
+	if(isset($_GET['id']))
+		$idLaporan = $_GET['id'];
+	else 
+		$idLaporan = 0;
 ?>
 
 <?php include "admin_header.php"; ?>
@@ -354,4 +359,30 @@ $(document).on('click', '.delete', function(){
 		}
 	});
  });
+
+ var showLaporan = function(){
+	var id = '<?php echo $idLaporan ?>';
+	if(id != 0){
+		var tbl = 'laporan';
+		var opr = 'readOne';
+		$.ajax({
+			url:base_url+"helper/read.php",
+			method:"POST",
+			data:{id:id,table:tbl,operation:opr},
+			dataType:"json",
+			success:function(data)
+			{
+				openModalLoader();
+				setTimeout(function()
+				{
+					$('#ket_kecelakaan').val(data.isi);
+					$('#lokasi').val(data.lokasi);
+					closeModalLoader();
+				}, 3000);
+			}
+		});
+	}
+	 
+}
+showLaporan();
 </script>

@@ -82,6 +82,7 @@
 
 		if(empty($imgFile)) {
 			$errMsg = "File gambar belum dipilih..";
+			$userpic = '-';
 		} else {
 			$upload_dir = '../gambar/'; // upload directory
 	 
@@ -100,9 +101,11 @@
 				  move_uploaded_file($tmp_dir,$upload_dir.$userpic);
 				} else {
 				  $errMSG = "Maaf, ukuran file anda terlalu besar.";
+				  $userpic = '-';
 				}
 			} else {
 				$errMSG = "Maaf, hanya ekstensi JPG, JPEG, PNG & GIF yang diterima.";  
+				$userpic = '-';
 			}
 		}
 		
@@ -143,6 +146,7 @@
 
 		if(empty($imgFile)) {
 			$errMsg = "File gambar belum dipilih..";
+			$userpic = '-';
 		} else {
 			$upload_dir = '../gambar/'; // upload directory
 	 
@@ -161,9 +165,11 @@
 				  move_uploaded_file($tmp_dir,$upload_dir.$userpic);
 				} else {
 				  $errMSG = "Maaf, ukuran file anda terlalu besar.";
+				  $userpic = '-';
 				}
 			} else {
 				$errMSG = "Maaf, hanya ekstensi JPG, JPEG, PNG & GIF yang diterima.";  
+				$userpic = '-';
 			}
 		}
 		

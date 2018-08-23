@@ -72,6 +72,8 @@
 				$output['id'] = $row["id"];
 				$output["judul"] = $row["judul"];
 				$output["isi"] = $row["isi"];
+				$output["gambar"] = $row["gambar"];
+				$output["video"] = $row["video"];
 				$output["alamat"] = $row["alamat"];
 			}
 			echo json_encode($output);

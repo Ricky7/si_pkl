@@ -36,14 +36,14 @@
 			</div>
 			<div class="form-group">
 				<label for="gambar">Gambar</label>
-				<input type="file" class="form-control" id="gambar" name="gambar" required>
+				<input type="file" class="form-control" id="gambar" name="gambar">
 			</div>
 			<div class="form-group">
 				<div id="img"></div>
 			</div>
 			<div class="form-group">
 				<label for="video">Video</label>
-				<input type="file" class="form-control" id="video" name="video" required>
+				<input type="file" class="form-control" id="video" name="video">
 			</div>
 			<div class="form-group">
 				<label for="lokasi">Alamat Lokasi</label>

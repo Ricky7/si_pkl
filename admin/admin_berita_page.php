@@ -23,7 +23,7 @@
 <?php include "admin_footer.php"; ?>
 
 <script type="text/javascript">
-$(document).on('change', 'input[type="file"]', function(e){
+$(document).on('change', '#gambar', function(e){
 	var fileName = e.target.files[0].name;
 	var tmppath = URL.createObjectURL(e.target.files[0]);
 	var img = '<img class="img-responsive img-append" src="'+tmppath+'" width="300px" height="200px">';

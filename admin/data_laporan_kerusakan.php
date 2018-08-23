@@ -7,7 +7,7 @@
 		<th>Lokasi</th>
 		<th>Pelapor</th>
 		<th width="15%">Tanggal</th>
-		<th width="15%">Aksi</th>
+		<th width="25%">Aksi</th>
 	</thead>
 	<tbody>
 	  

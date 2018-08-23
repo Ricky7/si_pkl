@@ -509,6 +509,7 @@
 			$sub_array[] = $row['nama'];
 			$sub_array[] = $row['tgl_lapor'];
 			$sub_array[] = '
+				<button type="button" name="publish" id="'.$row["idL"].'" class="btn btn-primary btn-sm publish" data-toggle="modal" data-target="#actionModal">Publish</button>				
 				<button type="button" name="view" id="'.$row["idL"].'" class="btn btn-primary btn-sm view">View</button>
 				<button type="button" name="delete" id="'.$row["idL"].'" class="btn btn-danger btn-sm delete">Delete</button>
 				';
@@ -562,6 +563,7 @@
 			$sub_array[] = $row['nama'];
 			$sub_array[] = $row['tgl_lapor'];
 			$sub_array[] = '
+				<button type="button" name="publish" id="'.$row["idL"].'" class="btn btn-primary btn-sm publish" data-toggle="modal" data-target="#actionModal">Publish</button>
 				<button type="button" name="view" id="'.$row["idL"].'" class="btn btn-primary btn-sm view">View</button>
 				<button type="button" name="delete" id="'.$row["idL"].'" class="btn btn-danger btn-sm delete">Delete</button>
 				';

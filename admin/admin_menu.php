@@ -36,7 +36,8 @@
 		<li class="nav-item">
 			<a class="nav-link" href="admin_berita_page.php">Berita</a>
 		</li>
-		<?php } else { ?>
+		<?php } ?> 
+		<?php if($_SESSION['adminRole'] == 'admin' || $_SESSION['adminRole'] == 'head') { ?>
 		<li class="nav-item">
 			<a class="nav-link" href="admin_report_page.php">Report</a>
 		</li>

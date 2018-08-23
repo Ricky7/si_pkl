@@ -26,6 +26,14 @@
   </section>
 	
 	<div class="container">
+		<div class="row">
+			<div class="col-md-8">
+				<h5>Berita Kejadian</h5>
+			</div>
+			<div class="col-md-4">
+				<h5>Berita Kerusakan</h5>
+			</div>
+		</div>
 		<div class="row" style="margin-bottom:30px;"> 
 			<div class="col-md-8">
 				<!-- slider -->
@@ -39,6 +47,7 @@
 					</ul>
 
 					<!-- The slideshow -->
+					
 					<div class="carousel-inner" id="carousel1">
 						
 					</div>
@@ -53,11 +62,15 @@
 
 				</div>
 			</div>
+			
 			<div class="col-md-4 rightnews" id="carousel2">
 			</div>
 		</div>
 
 		<div class="row">
+			<div class="col-md-12">
+				<h5>Berita Umum</h5>
+			</div>
 			<div class="col-md-12 bottomnews" id="carousel3">
 			</div>
 		</div>
