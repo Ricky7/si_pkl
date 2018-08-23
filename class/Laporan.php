@@ -2,7 +2,9 @@
 	/*
 		handle semua laporan user
 	*/
-	class Laporan {
+	require_once '../library/Pdf.php';
+
+	class Laporan extends Pdf {
 		
 		private $db;
 		private $error;
@@ -92,6 +94,32 @@
 			$output = $statement->fetchAll();
 			
 		  echo json_encode($output);
+		}
+
+		private function _dataKejadian($data = array())
+		{
+			$statement = $this->db->prepare(
+				"SELECT *, a.id as ids FROM kejadian a INNER JOIN kasus b 
+					ON (b.id = a.id_kasus) 
+					WHERE DATE(a.tgl_buat) 
+					BETWEEN '".$data['from']."' AND '".$data['to']."' AND a.id_kasus = '".$data['kasus']."'"
+			);
+			$statement->execute();
+			$result = $statement->fetchAll();
+			return $result;
+		}
+
+		public function _laporan($data = array(), $title = array(), $headData = array(), $titleData = array(), $initial = array())
+		{
+			$result = $this->headTable($headData);
+			$result .= $this->titleTable($titleData);
+			$_data = $this->_dataKejadian($data);
+			$result .= $this->contentTable($_data, $title);
+			$result .= $this->footTable();
+			$res = $this->initial($initial, $result);
+			
+			// $result = $this->_dataKejadian($data);
+			return $result;
 		}
 		
 		private function output($msg,$print)

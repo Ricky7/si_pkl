@@ -131,4 +131,12 @@ var tabelReportKejadian = function(start, end, tb, pivot){
 		],
 	});
 }
+
+var fetchPdf = function(table) {
+	var start = $('#from').val();
+	var end = $('#to').val();
+	var tb = table;
+	var uri = "laporan_pdf.php?from="+start+"&to="+end+"&kasus="+table;
+	window.open(uri, '_blank');
+}
 </script>
