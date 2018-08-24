@@ -277,7 +277,11 @@
 				);
 				return $this->output('suc', 'Berhasil Dihapus');
 			}catch(PDOException $e){
-				return $this->output('err', $e->getMessage());
+				if($e->getCode() == '23000'){
+					return $this->output('err', 'Data Gagal dihapus, Hapus data terkait terlebih dahulu');
+				} else {
+					return $this->output('err', $e->getMessage());
+				}
 			}
 		}
 		

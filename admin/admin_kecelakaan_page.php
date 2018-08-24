@@ -385,4 +385,5 @@ $(document).on('click', '.delete', function(){
 	 
 }
 showLaporan();
+
 </script>

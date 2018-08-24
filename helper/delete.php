@@ -47,6 +47,12 @@
 		echo json_encode($result);
 	}
 
+	if($_POST["operation"] == "delete" && $_POST["table"] == "kecelakaan"){
+		$event = new Event($db);
+		$result = $event->delData($_POST['id'],$_POST["table"]);
+		echo json_encode($result);
+	}
+
 	if($_POST["operation"] == "delete" && $_POST["table"] == "korban"){
 		$event = new Event($db);
 		$result = $event->delData($_POST['id'],$_POST["table"]);

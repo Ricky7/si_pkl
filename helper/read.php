@@ -79,7 +79,7 @@
 			$sub_array[] = $row['nama_kasus'];
 			$sub_array[] = $row['tgl_buat'];
 			$sub_array[] = '
-				<button type="button" name="edit" id="'.$row["idK"].'" class="btn btn-primary btn-sm edit">Edit</button>
+				<button type="button" name="edit" id="'.$row["idK"].'" class="btn btn-danger btn-sm edit">Edit</button>
 				<button type="button" name="delete" id="'.$row["idK"].'" class="btn btn-danger btn-sm delete">Delete</button>
 				';
 			$data[] = $sub_array;
@@ -1186,6 +1186,7 @@
 			$sub_array[] = $row['nama'];
 			$sub_array[] = '
 				<button type="button" name="edit" id="'.$row["id_k"].'" class="btn btn-primary btn-sm edit">View</button>
+				<button type="button" name="delete" id="'.$row["id_k"].'" data-table="kecelakaan" class="btn btn-danger btn-sm delete">Delete</button>
 				';
 			$data[] = $sub_array;
 			$num++;
