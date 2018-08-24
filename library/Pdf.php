@@ -24,17 +24,12 @@
         
         public function contentTable($data = array(), $title = array())
         {
-
-            
-            $i = 0;
-            // foreach ($data as $row) {
-            //     $content .= '<td>'.$data[$i]['data'].'</td>'; 
-            //     $i++;
-            // }
+            $i = 1;
             $content = '<tbody>';
             foreach ($data as $row) 
             {
                 $content .= '<tr>';
+                $content .= '<td>'.$i.'</td>';
                 foreach($title as $key => $value)
                 {
                     $content .= '<td>'.$row[$value].'</td>'; 

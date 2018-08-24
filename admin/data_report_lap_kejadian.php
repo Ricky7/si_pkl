@@ -1,3 +1,8 @@
+<div class="row">
+	<div class="col-md-12">
+		<strong>Report Laporan Kejadian<strong>
+	</div>
+</div>
 <div class="row" style="margin-bottom:30px;">
 	<div class="col-md-3">
 		<input type="text" class="form-control from" id="from" name="from">
@@ -10,6 +15,9 @@
 	</div>
 	<div class="col-md-1">
 		<button type="submit" onclick="fetchExcel('lapKejadian')" class="btn btn-xs btn-primary">Export</button>
+	</div>
+	<div class="col-md-1">
+		<button type="click" onclick="fetchPdf('laporKejadian')" class="btn btn-xs btn-danger">PDF</button>
 	</div>
 </div>
 <div class="table-responsive">

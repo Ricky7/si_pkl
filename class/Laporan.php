@@ -109,7 +109,31 @@
 			return $result;
 		}
 
-		public function _laporan($data = array(), $title = array(), $headData = array(), $titleData = array(), $initial = array())
+		private function _dataKecelakaan($data = array())
+		{
+			$statement = $this->db->prepare(
+				"SELECT * FROM kecelakaan a
+					WHERE DATE(a.createAt) 
+					BETWEEN '".$data['from']."' AND '".$data['to']."'"
+			);
+			$statement->execute();
+			$result = $statement->fetchAll();
+			return $result;
+		}
+
+		private function _dataLaporanWarga($data = array())
+		{
+			$statement = $this->db->prepare(
+				"SELECT * FROM laporan a
+					WHERE DATE(a.tgl_lapor) 
+					BETWEEN '".$data['from']."' AND '".$data['to']."' AND a.jenis_laporan = '".$data['kasus']."'"
+			);
+			$statement->execute();
+			$result = $statement->fetchAll();
+			return $result;
+		}
+
+		public function _laporanKejadian($data = array(), $title = array(), $headData = array(), $titleData = array(), $initial = array())
 		{
 			$result = $this->headTable($headData);
 			$result .= $this->titleTable($titleData);
@@ -117,8 +141,28 @@
 			$result .= $this->contentTable($_data, $title);
 			$result .= $this->footTable();
 			$res = $this->initial($initial, $result);
-			
-			// $result = $this->_dataKejadian($data);
+			return $result;
+		}
+
+		public function _laporanKecelakaan($data = array(), $title = array(), $headData = array(), $titleData = array(), $initial = array())
+		{
+			$result = $this->headTable($headData);
+			$result .= $this->titleTable($titleData);
+			$_data = $this->_dataKecelakaan($data);
+			$result .= $this->contentTable($_data, $title);
+			$result .= $this->footTable();
+			$res = $this->initial($initial, $result);
+			return $result;
+		}
+
+		public function _laporanWarga($data = array(), $title = array(), $headData = array(), $titleData = array(), $initial = array())
+		{
+			$result = $this->headTable($headData);
+			$result .= $this->titleTable($titleData);
+			$_data = $this->_dataLaporanWarga($data);
+			$result .= $this->contentTable($_data, $title);
+			$result .= $this->footTable();
+			$res = $this->initial($initial, $result);
 			return $result;
 		}
 		

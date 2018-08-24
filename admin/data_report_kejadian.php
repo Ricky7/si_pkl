@@ -1,3 +1,8 @@
+<div class="row">
+	<div class="col-md-12">
+		<strong>Report Kejadian<strong>
+	</div>
+</div>
 <div class="row" style="margin-bottom:30px;">
 	<div class="col-md-3">
 		<input type="text" class="form-control from" id="from" name="from">
@@ -12,7 +17,7 @@
 		<button type="click" onclick="fetchExcel('kejadian')" class="btn btn-xs btn-primary">Export</button>
 	</div>
 	<div class="col-md-1">
-		<button type="click" onclick="fetchPdf(1)" class="btn btn-xs btn-danger">PDF</button>
+		<button type="click" onclick="fetchPdf('kejadian')" class="btn btn-xs btn-danger">PDF</button>
 	</div>
 </div>
 <div class="table-responsive">
