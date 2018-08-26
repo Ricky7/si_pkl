@@ -111,11 +111,33 @@
 
 		private function _dataKecelakaan($data = array())
 		{
-			$statement = $this->db->prepare(
-				"SELECT * FROM kecelakaan a
-					WHERE DATE(a.createAt) 
-					BETWEEN '".$data['from']."' AND '".$data['to']."'"
-			);
+			$sql = 
+				"SELECT 
+					kode, 
+					createAt,
+					lokasi,
+					qPenumpang.jPenumpang as penumpang, 
+					qSaksi.jSaksi as saksi,
+					qTersangka.jTersangka as tersangka,
+					qKorban.jKorban as korban
+				FROM kecelakaan,
+				(
+					SELECT kecelakaan_id, COUNT(id) as jPenumpang FROM penumpang GROUP BY kecelakaan_id
+				) as qPenumpang,
+				(
+					SELECT kecelakaan_id, COUNT(id) as jSaksi FROM saksi GROUP BY kecelakaan_id
+				) as qSaksi,
+				(
+					SELECT kecelakaan_id, COUNT(id) as jTersangka FROM tersangka GROUP BY kecelakaan_id
+				) as qTersangka,
+				(
+					SELECT kecelakaan_id, COUNT(id) as jKorban FROM korban GROUP BY kecelakaan_id
+				) as qKorban
+				WHERE  kecelakaan.id = qPenumpang.kecelakaan_id
+				AND kecelakaan.id = qSaksi.kecelakaan_id
+				AND kecelakaan.id = qTersangka.kecelakaan_id
+				AND kecelakaan.id = qKorban.kecelakaan_id";
+			$statement = $this->db->prepare($sql);
 			$statement->execute();
 			$result = $statement->fetchAll();
 			return $result;
@@ -124,7 +146,8 @@
 		private function _dataLaporanWarga($data = array())
 		{
 			$statement = $this->db->prepare(
-				"SELECT * FROM laporan a
+				"SELECT * FROM laporan a INNER JOIN users b
+					ON(a.id_user = b.id)
 					WHERE DATE(a.tgl_lapor) 
 					BETWEEN '".$data['from']."' AND '".$data['to']."' AND a.jenis_laporan = '".$data['kasus']."'"
 			);

@@ -13,11 +13,11 @@
 	<div class="col-md-1">
 		<button type="click" onclick="fetchTable('kejadian','data_report_kejadian')" class="btn btn-xs btn-default">Submit</button>
 	</div>
-	<div class="col-md-1">
+	<!-- <div class="col-md-1">
 		<button type="click" onclick="fetchExcel('kejadian')" class="btn btn-xs btn-primary">Export</button>
-	</div>
+	</div> -->
 	<div class="col-md-1">
-		<button type="click" onclick="fetchPdf('kejadian')" class="btn btn-xs btn-danger">PDF</button>
+		<button type="click" onclick="fetchPdf('kejadian')" class="btn btn-xs btn-primary">PDF</button>
 	</div>
 </div>
 <div class="table-responsive">

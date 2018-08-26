@@ -100,11 +100,11 @@
         );
 
         /** Set Tabel Title */
-        $title = array('No','Kode', 'Lokasi', 'Tanggal');
+        $title = array('No','Kode', 'Lokasi', 'Tanggal', 'Penumpang', 'Saksi', 'Tersangka', 'Korban');
         /** Set Table Size */
-        $size = array('3%','27%','45%','25%');
+        $size = array('3%','12%','25%','20%','10%','10%','10%','10%');
         /** Set field Tabel */
-        $field = array('kode','lokasi','createAt');
+        $field = array('kode','lokasi','createAt', 'penumpang', 'saksi', 'tersangka', 'korban');
 
         /** Set Head Laporan */
         $headData = array(
@@ -143,11 +143,11 @@
         );
 
         /** Set Tabel Title */
-        $title = array('No','Judul', 'Lokasi', 'Tanggal');
+        $title = array('No','Judul', 'Lokasi', 'Pelapor', 'Tanggal');
         /** Set Table Size */
-        $size = array('3%','37%','35%','25%');
+        $size = array('3%','32%','30%', '10%','25%');
         /** Set field Tabel */
-        $field = array('judul','lokasi','tgl_lapor');
+        $field = array('judul','lokasi','nama','tgl_lapor');
 
         /** Set Head Laporan */
         $headData = array(
@@ -186,11 +186,11 @@
         );
 
         /** Set Tabel Title */
-        $title = array('No','Judul', 'Lokasi', 'Tanggal');
+        $title = array('No','Judul', 'Lokasi', 'Pelapor', 'Tanggal');
         /** Set Table Size */
-        $size = array('3%','37%','35%','25%');
+        $size = array('3%','32%','30%', '10%','25%');
         /** Set field Tabel */
-        $field = array('judul','lokasi','tgl_lapor');
+        $field = array('judul','lokasi','nama','tgl_lapor');
 
         /** Set Head Laporan */
         $headData = array(

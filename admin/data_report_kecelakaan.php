@@ -13,11 +13,11 @@
 	<div class="col-md-1">
 		<button type="submit" onclick="fetchTable('kecelakaan','data_report_kecelakaan')" class="btn btn-xs btn-default">Submit</button>
 	</div>
-	<div class="col-md-1">
+	<!-- <div class="col-md-1">
 		<button type="submit" onclick="fetchExcel('kecelakaan')" class="btn btn-xs btn-primary">Export</button>
-	</div>
+	</div> -->
 	<div class="col-md-1">
-		<button type="click" onclick="fetchPdf('kecelakaan')" class="btn btn-xs btn-danger">PDF</button>
+		<button type="click" onclick="fetchPdf('kecelakaan')" class="btn btn-xs btn-primary">PDF</button>
 	</div>
 </div>
 <div class="table-responsive">
