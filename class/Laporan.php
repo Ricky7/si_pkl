@@ -158,7 +158,8 @@
 
 		public function _laporanKejadian($data = array(), $title = array(), $headData = array(), $titleData = array(), $initial = array())
 		{
-			$result = $this->headTable($headData);
+			$result = $this->kopSurat($headData);
+			$result .= $this->headTable($headData);
 			$result .= $this->titleTable($titleData);
 			$_data = $this->_dataKejadian($data);
 			$result .= $this->contentTable($_data, $title);
@@ -169,7 +170,8 @@
 
 		public function _laporanKecelakaan($data = array(), $title = array(), $headData = array(), $titleData = array(), $initial = array())
 		{
-			$result = $this->headTable($headData);
+			$result = $this->kopSurat($headData);
+			$result .= $this->headTable($headData);
 			$result .= $this->titleTable($titleData);
 			$_data = $this->_dataKecelakaan($data);
 			$result .= $this->contentTable($_data, $title);
@@ -180,13 +182,25 @@
 
 		public function _laporanWarga($data = array(), $title = array(), $headData = array(), $titleData = array(), $initial = array())
 		{
-			$result = $this->headTable($headData);
+			$result = $this->kopSurat($headData);
+			$result .= $this->headTable($headData);
 			$result .= $this->titleTable($titleData);
 			$_data = $this->_dataLaporanWarga($data);
 			$result .= $this->contentTable($_data, $title);
 			$result .= $this->footTable();
 			$res = $this->initial($initial, $result);
 			return $result;
+		}
+
+		private function kopSurat($data = array())
+		{
+			$head = '<center><img src="../images/icon.png" width="100px" heigth="100px"></center>';
+			$head .= '<center><h4 style="padding-bottom:-40px">KEPOLISIAN NEGARA REPULIK INDONESIA</h4></center>';
+			$head .= '<center><h4 style="padding-bottom:-40px">DAERAH SUMATERA UTARA</h4></center>';
+			$head .= '<center><h4 style="padding-bottom:-40px">RESOR SIMALUNGUN</h4></center>';
+			$head .= '<center><h5 style="padding-bottom:-40px"><u>Jalan Jon Horailam Saragih No. 110 P. Raya 21162</u></h5></center>';
+			$head .= '<center><h5>Perihal : '.$data['title'].'</h5></center>';
+			return $head;
 		}
 		
 		private function output($msg,$print)

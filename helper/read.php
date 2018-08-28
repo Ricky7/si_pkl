@@ -1153,10 +1153,10 @@
 		$query = '';
 		$output = array();
 		$query .= "SELECT a.id as id_k,a.kode, DATE(a.tanggal) as tgl, a.lokasi, b.nama 
-					FROM kecelakaan a INNER JOIN admin b ON (b.id = a.admin_id) ";
+					FROM kecelakaan a INNER JOIN admin b ON (b.id = a.admin_id) WHERE a.status = 2 ";
 		if(isset($_POST["search"]["value"]))
 		{
-			$query .= 'WHERE a.kode LIKE "%'.$_POST["search"]["value"].'%" ';
+			$query .= 'AND a.kode LIKE "%'.$_POST["search"]["value"].'%" ';
 		}
 		if(isset($_POST["order"]))
 		{
@@ -1185,6 +1185,60 @@
 			$sub_array[] = $row['lokasi'];
 			$sub_array[] = $row['nama'];
 			$sub_array[] = '
+				<button type="button" name="edit" id="'.$row["id_k"].'" class="btn btn-primary btn-sm edit">View</button>
+				<button type="button" name="delete" id="'.$row["id_k"].'" data-table="kecelakaan" class="btn btn-danger btn-sm delete">Delete</button>
+				';
+			$data[] = $sub_array;
+			$num++;
+		}
+		$output = array(
+			"draw"				=>	intval($_POST["draw"]),
+			"recordsTotal"		=> 	$filtered_rows,
+			"recordsFiltered"	=>	$event->total_records('kecelakaan'),
+			"data"				=>	$data
+		);
+		echo json_encode($output);
+	}
+
+	// data kecelakaan pending
+	if($_POST["operation"] == "read" && $_POST["table"] == "kecelakaanPending"){
+		$event = new Event($db);
+		$query = '';
+		$output = array();
+		$query .= "SELECT a.id as id_k,a.kode, DATE(a.tanggal) as tgl, a.lokasi, b.nama 
+					FROM kecelakaan a INNER JOIN admin b ON (b.id = a.admin_id) WHERE a.status = 1 ";
+		if(isset($_POST["search"]["value"]))
+		{
+			$query .= 'AND a.kode LIKE "%'.$_POST["search"]["value"].'%" ';
+		}
+		if(isset($_POST["order"]))
+		{
+			$query .= 'ORDER BY '.$_POST['order']['0']['column'].' '.$_POST['order']['0']['dir'].' ';
+		}
+		else
+		{
+			$query .= 'ORDER BY a.id DESC ';
+		}
+		if($_POST["length"] != -1)
+		{
+			$query .= 'LIMIT ' . $_POST['start'] . ', ' . $_POST['length'];
+		}
+		$statement = $db->prepare($query);
+		$statement->execute();
+		$result = $statement->fetchAll();
+		$data = array();
+		$filtered_rows = $statement->rowCount();
+		$num = 1;
+		foreach($result as $row)
+		{
+			$sub_array = array();
+			$sub_array[] = $num;
+			$sub_array[] = $row['kode'];
+			$sub_array[] = $row['tgl'];
+			$sub_array[] = $row['lokasi'];
+			$sub_array[] = $row['nama'];
+			$sub_array[] = '
+				<button type="button" name="approve" id="'.$row["id_k"].'" class="btn btn-primary btn-sm approve">Approve</button>
 				<button type="button" name="edit" id="'.$row["id_k"].'" class="btn btn-primary btn-sm edit">View</button>
 				<button type="button" name="delete" id="'.$row["id_k"].'" data-table="kecelakaan" class="btn btn-danger btn-sm delete">Delete</button>
 				';

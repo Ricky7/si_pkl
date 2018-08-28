@@ -118,6 +118,7 @@
 				return $this->output('err', $e->getMessage());
 			}
 		}
+		
 
 		public function updateKecelakaan($data = array())
 		{
@@ -131,6 +132,7 @@
 				if(!empty($data['gambar'])) $sql .= "gambar = '".$data['gambar']."', ";
 				if(!empty($data['keterangan'])) $sql .= "keterangan = '".$data['keterangan']."', ";
 				if(!empty($data['info_jalan'])) $sql .= "info_jalan = '".$data['info_jalan']."', ";
+				if(!empty($data['status'])) $sql .= "status = '".$data['status']."', ";
 				$sql .= "updateAt = NOW() WHERE id = '".$data['id']."'";
 
 				$query = $this->db->prepare($sql);
@@ -142,6 +144,17 @@
 			} catch (PDOException $e){
 				$this->db->rollBack();
 				return $this->output('err',$e->getMessage());
+			}
+		}
+
+		public function approveKecelakaan($data = array())
+		{
+			$sql = "UPDATE kecelakaan SET status = {$data['status']}, updateAt = NOW()  WHERE id = '".$data['id']."'";
+			$query = $this->db->prepare($sql);
+			if($query->execute()){
+				return $this->output('suc', 'Berhasil Diupdate');
+			} else {
+				return $this->output('err', 'Gagal');
 			}
 		}
 		
@@ -355,7 +368,7 @@
 			return $output;
 		}
 
-		public function insertKecelakaan($data_laka = array(), $data_pengemudi = array(), $data_penumpang = array(), $data_saksi = array(), $data_tersangka = array(), $data_korban = array())
+		public function insertKecelakaan($data_laka = array(), $data_pengemudi = array(), $data_penumpang = array(), $data_saksi = array(), $data_korban = array())
 		{
 			try
 			  {
@@ -365,7 +378,7 @@
 				$this->setPengemudi($data_pengemudi, $lastId);
 				$this->setPenumpang($data_penumpang, $lastId);
 				$this->setSaksi($data_saksi, $lastId);
-				$this->setTersangka($data_tersangka, $lastId);
+				//$this->setTersangka($data_tersangka, $lastId);
 				$this->setKorban($data_korban, $lastId);
 				$this->db->commit();
 
@@ -380,8 +393,8 @@
 		private function setLaka($data = array())
 		{
 			$add = $this->db->prepare("
-				INSERT INTO kecelakaan(kode, tanggal, lokasi, lat, lng, gambar, keterangan, info_jalan, admin_id, createAt, updateAt)
-				VALUES (:kode, :tanggal, :lokasi, :lat, :lng, :gambar, :ket, :info_jalan, :admin_id, NOW(), NOW());
+				INSERT INTO kecelakaan(kode, tanggal, lokasi, lat, lng, gambar, keterangan, info_jalan, admin_id, createAt, updateAt, status)
+				VALUES (:kode, :tanggal, :lokasi, :lat, :lng, :gambar, :ket, :info_jalan, :admin_id, NOW(), NOW(), :status);
 			");
 			$add->bindParam(":kode", $data['kode']);
 			$add->bindParam(":tanggal", $data['tanggal']);
@@ -391,6 +404,7 @@
 			$add->bindParam(":gambar", $data['gambar']);
 			$add->bindParam(":ket", $data['keterangan']);
 			$add->bindParam(":info_jalan", $data['info_jalan']);
+			$add->bindParam(":status", $data['status']);
 			$add->bindParam(":admin_id", $data['admin_id']);
 			$add->execute();
 		}

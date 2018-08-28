@@ -292,6 +292,7 @@
 			'gambar' => $userpic,
 			'keterangan' => $_POST['ket_kecelakaan'],
 			'info_jalan' => $_POST['info_jalan'],
+			'status' => $_POST['status'],
 			'admin_id' =>  $_SESSION['admin_session']
 		);
 
@@ -327,14 +328,14 @@
 			'pernyataan' => $_POST['pernyataan_saksi']
 		);
 
-		$data_tersangka = array(
-			'nama' => $_POST['nama_tersangka'],
-			'no_ktp' => $_POST['ktp_tersangka'],
-			'umur' => $_POST['umur_tersangka'],
-			'alamat' => $_POST['alamat_tersangka'],
-			'jenis_kelamin' => $_POST['gender_tersangka'],
-			'pernyataan' => $_POST['pernyataan_tersangka']
-		);
+		// $data_tersangka = array(
+		// 	'nama' => $_POST['nama_tersangka'],
+		// 	'no_ktp' => $_POST['ktp_tersangka'],
+		// 	'umur' => $_POST['umur_tersangka'],
+		// 	'alamat' => $_POST['alamat_tersangka'],
+		// 	'jenis_kelamin' => $_POST['gender_tersangka'],
+		// 	'pernyataan' => $_POST['pernyataan_tersangka']
+		// );
 
 		$data_korban = array(
 			'nama' => $_POST['nama_korban'],
@@ -346,7 +347,7 @@
 			'status' => $_POST['status_korban']
 		);
 		
-		$res = $event->insertKecelakaan($data_laka, $data_pengemudi, $data_penumpang, $data_saksi, $data_tersangka, $data_korban);
+		$res = $event->insertKecelakaan($data_laka, $data_pengemudi, $data_penumpang, $data_saksi, $data_korban);
 		echo json_encode($res);
 	}
 

@@ -3,9 +3,7 @@
         
         public function headTable($data = array())
 		{
-			$head = '<h3 align="center">'.$data['title'].'</h3><br>
-						<h4 align="center">'.$data['subtitle'].'</h4>
-						<div>Tanggal : '.$data['tgl'].'</div><br>
+			$head = '<div>Tanggal : '.$data['tgl'].'</div><br>
 						<table style="width:100%;" border="1" color="black">';
 			return $head;
 		}
@@ -46,6 +44,12 @@
 		{
 			$foot = '</table>';
 			return $foot;
+        }
+
+        public function sign()
+        {
+            $sign = '';
+            return $sign;
         }
         
         public function initial($data = array(), $html)

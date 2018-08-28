@@ -125,7 +125,7 @@
         /** Set Dompdf Configuration */
         $initial = array(
             'paperSize' => 'a4',
-            'paperType' => 'portrait',
+            'paperType' => 'landscape',
             'fileName' => 'Laporan Kecelakaan'
         );
         

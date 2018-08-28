@@ -45,7 +45,7 @@
                     </div>
                     <div class="col-4">
                         <label>No KTP</label>
-                        <input type="number" class="form-control" id="ktp_pengemudi" name="ktp_pengemudi" required>
+                        <input type="number" class="form-control" id="ktp_pengemudi" name="ktp_pengemudi">
                     </div>
                     <div class="col-4">
                         <label>No Plat</label>

@@ -57,16 +57,16 @@
 				<div class="card-body">
 					<div class="form-group">
 						<label>Nama</label>
-						<input type="text" class="form-control" id="nama_pengemudi" name="nama_pengemudi" required>
+						<input type="text" class="form-control" id="nama_pengemudi" name="nama_pengemudi">
 					</div>
 					<div class="form-group row">
 						<div class="col-4">
 							<label>Umur</label>
-							<input type="number" class="form-control" id="umur_pengemudi" name="umur_pengemudi" required>
+							<input type="number" class="form-control" id="umur_pengemudi" name="umur_pengemudi">
 						</div>
 						<div class="col-4">
 							<label>Jenis Kelamin</label>
-							<select class="form-control" id="gender_pengemudi" name="gender_pengemudi" required>
+							<select class="form-control" id="gender_pengemudi" name="gender_pengemudi">
 								<option></option>
 								<option value="L">Laki laki</option>
 								<option value="P">Perempuan</option>
@@ -74,7 +74,7 @@
 						</div>
 						<div class="col-4">
 							<label>Jenis SIM</label>
-							<select class="form-control" id="jensim_pengemudi" name="jensim_pengemudi" required>
+							<select class="form-control" id="jensim_pengemudi" name="jensim_pengemudi">
 								<option></option>
 								<option value="-">Tidak Punya</option>
 								<option value="A">SIM A</option>
@@ -94,11 +94,11 @@
 						</div>
 						<div class="col-4">
 							<label>No KTP</label>
-							<input type="number" class="form-control" id="ktp_pengemudi" name="ktp_pengemudi" required>
+							<input type="number" class="form-control" id="ktp_pengemudi" name="ktp_pengemudi">
 						</div>
 						<div class="col-4">
 							<label>No Plat</label>
-							<input type="text" class="form-control" id="plat_pengemudi" name="plat_pengemudi" required>
+							<input type="text" class="form-control" id="plat_pengemudi" name="plat_pengemudi">
 						</div>
 					</div>
 					<div class="form-group">
@@ -207,7 +207,7 @@
 		<!-- close data saksi -->
 	</div>
 	<div class="row">
-		<div class="col-md-6">
+		<!-- <div class="col-md-6">
 			<div class="card">
 				<div class="card-header cardHeadLaka">
 					<h6>Data Tersangka</h6>
@@ -245,7 +245,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 		<div class="col-md-6">
 			<div class="card">
 				<div class="card-header cardHeadLaka">

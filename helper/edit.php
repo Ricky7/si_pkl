@@ -67,9 +67,20 @@
 			'lng' => $_POST['long'],
 			'gambar' => $userpic,
 			'keterangan' => $_POST['ket_kecelakaan'],
-			'info_jalan' => $_POST['info_jalan']
+			'info_jalan' => $_POST['info_jalan'],
+			'status' => $_POST['status']
 		);
 		$res = $event->updateKecelakaan($data);
+		echo json_encode($res);
+	}
+
+	if($_POST["operation"] == "edit" && $_POST["table"] == "approve"){
+		$event = new Event($db);
+		$data = array(
+			'id' => $_POST['id'],
+			'status' => $_POST['status']
+		);
+		$res = $event->approveKecelakaan($data);
 		echo json_encode($res);
 	}
 ?>

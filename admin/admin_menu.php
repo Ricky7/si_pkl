@@ -21,18 +21,24 @@
 		<li class="nav-item">
 			<a class="nav-link" href="admin_laporan_page.php">Laporan warga</a>
 		</li>
+		<?php } ?> 
+		<?php if($_SESSION['adminRole'] == 'admin' || $_SESSION['adminRole'] == 'polisi'){ ?>
 		<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			  Kasus
 			</a>
 			<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+				<?php if($_SESSION['adminRole'] == 'admin'){ ?>
 			  <a class="dropdown-item" href="admin_kejadian_page.php">Kejadian</a>
 			  <div class="dropdown-divider"></div>
 			  <a class="dropdown-item" href="admin_kerusakan_page.php">Kerusakan</a>
 			  <div class="dropdown-divider"></div>
+				<?php } ?> 
 			  <a class="dropdown-item" href="admin_kecelakaan_page.php">Kecelakaan</a>
 			</div>
 		</li>
+		<?php } ?> 
+		<?php if($_SESSION['adminRole'] == 'admin'){ ?>
 		<li class="nav-item">
 			<a class="nav-link" href="admin_berita_page.php">Berita</a>
 		</li>

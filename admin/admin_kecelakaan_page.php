@@ -18,7 +18,10 @@
 			<div class="card-header">
 				<a href="#" class="input_kecelakaan" onclick="loadPage('input_kecelakaan.php', inputFunc)">Input Kecelakaan</a>
 				|
-				<a href="#" class="data_kecelakaan" onclick="loadPage('data_kecelakaan.php', dataFunc)">Data Kecelakaan</a>
+				<?php if($_SESSION['adminRole'] == 'admin') { ?>
+				<a href="#" class="data_kecelakaan" onclick="loadPage('data_kecelakaan.php', dataFunc)">Data Kecelakaan
+				|</a><?php } ?>
+				<a href="#" class="data_kecelakaan_pending" onclick="loadPage('data_kecelakaan_pending.php', dataPendingFunc)">Data Kecelakaan Pending</a>
 			</div>
 			<div class="card-body">
 				<div id="isi">
@@ -40,7 +43,7 @@
 			</button>
 		</div>
 		<div class="modal-body">
-			<div id="extraAdd"></id>
+			<div id="extraAdd"></div>
 		</div>
 		<div class="modal-footer">
 
@@ -129,6 +132,11 @@ var dataFunc = function(){
 	console.log('run');
 }
 
+var dataPendingFunc = function(){
+	tabelKecelakaanPending();
+	console.log('data pending');
+}
+
 var editFunc = function(){
 	maps();
 }
@@ -141,11 +149,17 @@ loadPage('input_kecelakaan.php', inputFunc);
 
 $(document).on('submit', '#kecelakaan_form', function(event){
 	event.preventDefault();
+	if(isAdmin()){
+		var status = 2;
+	} else {
+		var status = 1;
+	}
 	var table = 'kecelakaan';
 	var operation = 'add';
 	var formData = new FormData(this);
 	formData.append('table', table);
 	formData.append('operation', operation);
+	formData.append('status', status);
 	$.ajax({
 		url: base_url+"helper/insert.php",
 		method:'POST',
@@ -218,6 +232,29 @@ var tabelKecelakaan = function(){
 	});
 }
 
+var tabelKecelakaanPending = function(){
+	var opr = 'read';
+	var tbl = 'kecelakaanPending';
+	var dataTable = $('#data_kecelakaan_pending').DataTable({
+		"processing":true,
+		"serverSide":true,
+		"destroy": true,
+		"order":[],
+		"ajax":{
+			url:base_url+"helper/read.php",
+			type:"POST",
+			data:{operation:opr,table:tbl},
+			dataType:"json"
+		},
+		"columnDefs":[
+		{
+			"targets":[0, 3, 4],
+			"orderable":false,
+		},
+		],
+	});
+}
+
 $(document).on('click', '.edit', function(){
 	var ids = $(this).attr("id");
     var tbl = 'kecelakaan';
@@ -260,6 +297,50 @@ $(document).on('click', '.edit', function(){
 		}
 	});
  });
+
+var isAdmin = function(){
+	var role = '<?php echo $_SESSION['adminRole']; ?>';
+	if(role == 'admin'){
+		return true;
+	} else {
+		return false;
+	}
+}
+$(document).on('click', '.approve', function(e){
+	e.preventDefault();
+	if(!isAdmin()){
+		$.alert('Hanya Admin Yang bisa Approve');
+		return;
+	}
+	var ids = $(this).attr("id");
+    var tbl = 'approve';
+    var opr = 'edit';
+	var status = 2;
+	$.confirm({
+		title: 'Confirm!',
+		content: 'Approve Data ?',
+		buttons: {
+			confirm: function () {
+				$.ajax({
+					url:base_url+"helper/edit.php",
+					method:"POST",
+					data:{id:ids,table:tbl,operation:opr,status:status},
+					dataType:"json",
+					success:function(data)
+					{
+						if(data.msg == 'suc'){
+							$.alert(data.print);
+							$('#data_kecelakaan_pending').DataTable().ajax.reload();
+						}
+					}
+				});
+			},
+			cancel: function () {
+				$.alert('Edit dibatalkan');
+			},
+		}
+	});
+ })
 
  $(document).on('submit', '#edit_kecelakaan_form', function(event){
   event.preventDefault();
@@ -345,6 +426,7 @@ $(document).on('click', '.delete', function(){
 						if(data.msg == 'suc'){
 							$.alert(data.print);
 							$('#data_'+tbl).DataTable().ajax.reload();
+							$('#data_kecelakaan_pending').DataTable().ajax.reload();
 						}
 						if(data.msg == 'err'){
 							$.alert(data.print);
