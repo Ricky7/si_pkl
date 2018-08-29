@@ -43,6 +43,58 @@
 			  return $this->output('err',getMessage());
 		  }
 		}
+
+		public function addPolisi($data = array())
+		{
+			$hashPasswd = password_hash('123456', PASSWORD_DEFAULT);
+			
+			$add = $this->db->prepare("
+				INSERT INTO admin(username, password, nama, role)
+				VALUES (:username, :password, :nama, :role);
+			");
+			$add->bindParam(":username", $data['username']);
+			$add->bindParam(":password", $hashPasswd);
+			$add->bindParam(":nama", $data['nama']);
+			$add->bindParam(":role", $data['role']);
+			if($add->execute()) {
+				return $this->output('suc','Berhasil');
+			} else {
+				return $this->output('err', 'Gagal');
+			}
+		}
+
+		public function updatePolisi($data = array())
+		{
+			try {
+				$sql = $this->db->prepare(
+					"UPDATE admin SET password = :pass WHERE id = :id"
+				);
+				$sql->bindparam(':pass', $data['password']);      
+			    $sql->bindparam(':id', $data['id']);
+			    $sql->execute();
+				
+				return $this->output('suc', 'Berhasil Diupdate');
+			}catch(PDOException $e){
+				return $this->output('err', $e->getMessage());
+			}
+		}
+
+		public function delPolisi($id)
+		{
+			try {
+				$statement = $this->db->prepare(
+					"DELETE FROM admin WHERE id = :id"
+				);
+				$result = $statement->execute(
+					array(
+						':id'	=>	$id
+					)
+				);
+				return $this->output('suc', 'Berhasil Dihapus');
+			}catch(PDOException $e){
+				return $this->output('err', $e->getMessage());
+			}
+		}
 		
 		public function isLog()
 		{

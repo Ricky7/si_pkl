@@ -57,7 +57,7 @@ $(document).on('change', 'input[type="file"]', function(e){
 	$('.img-append').remove();
 	var fileName = e.target.files[0].name;
 	var tmppath = URL.createObjectURL(e.target.files[0]);
-	var img = '<img class="img-responsive" src="'+tmppath+'" width="300px" height="200px">';
+	var img = '<img class="img-responsive img-append" src="'+tmppath+'" width="300px" height="200px">';
 	$('#img').append(img);
 });
 var tinymceScript = function(){
@@ -171,6 +171,7 @@ $(document).on('submit', '#kecelakaan_form', function(event){
 		{
 			if(data.msg == 'suc'){
 				$.alert(data.print);
+				$('.img-append').remove();
 				$('#kecelakaan_form')[0].reset();
 			}
 			if(data.msg == 'err'){

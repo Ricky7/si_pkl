@@ -41,6 +41,57 @@
 		$event->fetchKecelakaan($_POST['id']);
 	}
 
+	// data polisi
+	if($_POST["operation"] == "read" && $_POST["table"] == "polisi"){
+		$event = new Event($db);
+		$query = '';
+		$output = array();
+		$query .= "SELECT a.id as idK, a.nama, a.username  
+					FROM admin a WHERE a.role = 'polisi' ";
+		if(isset($_POST["search"]["value"]))
+		{
+			$query .= 'AND a.nama LIKE "%'.$_POST["search"]["value"].'%" ';
+		}
+		if(isset($_POST["order"]))
+		{
+			$query .= 'ORDER BY '.$_POST['order']['0']['column'].' '.$_POST['order']['0']['dir'].' ';
+		}
+		else
+		{
+			$query .= 'ORDER BY a.id DESC ';
+		}
+		if($_POST["length"] != -1)
+		{
+			$query .= 'LIMIT ' . $_POST['start'] . ', ' . $_POST['length'];
+		}
+		$statement = $db->prepare($query);
+		$statement->execute();
+		$result = $statement->fetchAll();
+		$data = array();
+		$filtered_rows = $statement->rowCount();
+		$num = 1;
+		foreach($result as $row)
+		{
+			$sub_array = array();
+			$sub_array[] = $num;
+			$sub_array[] = $row['nama'];
+			$sub_array[] = $row['username'];
+			$sub_array[] = '
+				<button type="button" name="pass" id="'.$row["idK"].'" class="btn btn-danger btn-sm pass" data-toggle="modal" data-target="#changePassModal">Change Password</button>
+				<button type="button" name="delete" id="'.$row["idK"].'" class="btn btn-danger btn-sm delete">Delete</button>
+				';
+			$data[] = $sub_array;
+			$num++;
+		}
+		$output = array(
+			"draw"				=>	intval($_POST["draw"]),
+			"recordsTotal"		=> 	$filtered_rows,
+			"recordsFiltered"	=>	$event->total_records('admin'),
+			"data"				=>	$data
+		);
+		echo json_encode($output);
+	}
+
 	if($_POST["operation"] == "read" && $_POST["table"] == "kejadian"){
 		$event = new Event($db);
 		$query = '';

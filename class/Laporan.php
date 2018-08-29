@@ -164,6 +164,7 @@
 			$_data = $this->_dataKejadian($data);
 			$result .= $this->contentTable($_data, $title);
 			$result .= $this->footTable();
+			$result .= $this->signPortrait();
 			$res = $this->initial($initial, $result);
 			return $result;
 		}
@@ -176,6 +177,7 @@
 			$_data = $this->_dataKecelakaan($data);
 			$result .= $this->contentTable($_data, $title);
 			$result .= $this->footTable();
+			$result .= $this->signLandscape();
 			$res = $this->initial($initial, $result);
 			return $result;
 		}
@@ -188,6 +190,7 @@
 			$_data = $this->_dataLaporanWarga($data);
 			$result .= $this->contentTable($_data, $title);
 			$result .= $this->footTable();
+			$result .= $this->signPortrait();
 			$res = $this->initial($initial, $result);
 			return $result;
 		}
@@ -202,6 +205,30 @@
 			$head .= '<center><h5>Perihal : '.$data['title'].'</h5></center>';
 			return $head;
 		}
+
+		private function signPortrait()
+        {   $sign = '<div style="padding-top:30px">';
+            $sign .= '<div style="padding-left:480px"><span>Dikeluarkan di :    Pematangraya</span></div>';
+            $sign .= '<div style="padding-left:480px"><span>Pada Tanggal    :    '.date("d M Y").'</span></div>';
+            $sign .= '<div style="padding-left:480px"><hr></div>';
+            $sign .= '<div style="padding-left:495px"><h5>KEPALA UNIT KECELAKAAN</h5></div>';
+            $sign .= '<div style="padding-left:480px;padding-top:50px"><hr></div>';
+            $sign .= '<div style="padding-left:525px;padding-top:-25px"><h5>INSPEKTUR POLISI</h5></div>';
+            $sign .= '</div>';
+            return $sign;
+		}
+		
+		private function signLandscape()
+        {   $sign = '<div style="padding-top:30px">';
+            $sign .= '<div style="padding-left:800px"><span>Dikeluarkan di :    Pematangraya</span></div>';
+            $sign .= '<div style="padding-left:800px"><span>Pada Tanggal    :    '.date("d M Y").'</span></div>';
+            $sign .= '<div style="padding-left:800px"><hr></div>';
+            $sign .= '<div style="padding-left:820px"><h5>KEPALA UNIT KECELAKAAN</h5></div>';
+            $sign .= '<div style="padding-left:800px;padding-top:50px"><hr></div>';
+            $sign .= '<div style="padding-left:850px;padding-top:-25px"><h5>INSPEKTUR POLISI</h5></div>';
+            $sign .= '</div>';
+            return $sign;
+        }
 		
 		private function output($msg,$print)
 		{

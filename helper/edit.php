@@ -14,6 +14,16 @@
 		$res = $event->updateKejadian($data);
 		echo json_encode($res);
 	}
+
+	if($_POST["operation"] == "edit" && $_POST["table"] == "polisi"){
+		$admin = new Admin($db);
+		$data = array(
+			'id' => $_POST['id'],
+			'password' => $_POST['password']
+		);
+		$res = $admin->updatePolisi($data);
+		echo json_encode($res);
+	}
 	
 	if($_POST["operation"] == "edit" && $_POST["table"] == "berita"){
 		$event = new Event($db);

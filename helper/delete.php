@@ -58,4 +58,10 @@
 		$result = $event->delData($_POST['id'],$_POST["table"]);
 		echo json_encode($result);
 	}
+
+	if($_POST["operation"] == "delete" && $_POST["table"] == "polisi"){
+		$admin = new Admin($db);
+		$result = $admin->delPolisi($_POST['id']);
+		echo json_encode($result);
+	}
 ?>

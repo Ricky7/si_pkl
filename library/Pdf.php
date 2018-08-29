@@ -45,12 +45,6 @@
 			$foot = '</table>';
 			return $foot;
         }
-
-        public function sign()
-        {
-            $sign = '';
-            return $sign;
-        }
         
         public function initial($data = array(), $html)
         {

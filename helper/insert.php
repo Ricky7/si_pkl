@@ -67,6 +67,18 @@
 		$res = $user->register($data);
 		echo json_encode($res);
 	}
+
+	// tambah polisi
+	if($_POST["operation"] == "add" && $_POST["table"] == "polisi"){
+		$admin = new Admin($db);
+		$data = array(
+			'nama' => $_POST['nama'],
+			'username' => $_POST['username'],
+			'role' => 'polisi'
+		);
+		$res = $admin->addPolisi($data);
+		echo json_encode($res);
+	}
 	
 	/*
 		Lapor Kejadian
