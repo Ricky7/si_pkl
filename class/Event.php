@@ -368,7 +368,7 @@
 			return $output;
 		}
 
-		public function insertKecelakaan($data_laka = array(), $data_pengemudi = array(), $data_penumpang = array(), $data_saksi = array(), $data_korban = array())
+		public function insertKecelakaan($data_laka = array(), $data_pengemudi = array(), $data_penumpang = array(), $data_saksi = array(), $data_tersangka = array(), $data_korban = array())
 		{
 			try
 			  {
@@ -378,7 +378,7 @@
 				$this->setPengemudi($data_pengemudi, $lastId);
 				$this->setPenumpang($data_penumpang, $lastId);
 				$this->setSaksi($data_saksi, $lastId);
-				//$this->setTersangka($data_tersangka, $lastId);
+				$this->setTersangka($data_tersangka, $lastId);
 				$this->setKorban($data_korban, $lastId);
 				$this->db->commit();
 

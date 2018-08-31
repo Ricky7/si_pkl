@@ -136,9 +136,9 @@
 		</div>
 		<!-- close data saksi -->
     </div>
-    <!-- <div class="row"> -->
+    <div class="row">
         <!-- open data tersangka -->
-		<!-- <div class="col-md-12">
+		<div class="col-md-12">
 			<div class="card">
 				<div class="card-header cardHeadLaka">
 					<h6>Data Tersangka</h6>
@@ -161,9 +161,9 @@
                     </table>
                 </div>
 			</div>
-		</div> -->
+		</div>
 		<!-- close data tersangka -->
-    <!-- </div> -->
+    </div>
     <div class="row">
         <!-- open data korban -->
 		<div class="col-md-12">

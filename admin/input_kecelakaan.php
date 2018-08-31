@@ -207,7 +207,7 @@
 		<!-- close data saksi -->
 	</div>
 	<div class="row">
-		<!-- <div class="col-md-6">
+		<div class="col-md-6">
 			<div class="card">
 				<div class="card-header cardHeadLaka">
 					<h6>Data Tersangka</h6>
@@ -245,7 +245,7 @@
 					</div>
 				</div>
 			</div>
-		</div> -->
+		</div>
 		<div class="col-md-6">
 			<div class="card">
 				<div class="card-header cardHeadLaka">

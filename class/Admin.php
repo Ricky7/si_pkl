@@ -65,11 +65,12 @@
 
 		public function updatePolisi($data = array())
 		{
+			$hashPasswd = password_hash($data['password'], PASSWORD_DEFAULT);
 			try {
 				$sql = $this->db->prepare(
 					"UPDATE admin SET password = :pass WHERE id = :id"
 				);
-				$sql->bindparam(':pass', $data['password']);      
+				$sql->bindparam(':pass', $hashPasswd);      
 			    $sql->bindparam(':id', $data['id']);
 			    $sql->execute();
 				
